@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Проект</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ </head>
+ <body>
+  <script src="https://unpkg.com/vue"></script>
+
+   <div id = "app">
+      <p><strong>S1</strong></p>
+       <p><select name="S1" v-model = "s1">
+         <option value="angularServomotor">angularServomotor</option>
+         <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+         <option value="quadroMotor">quadroMotor</option>
+         <option value="manipulatorServomotor">manipulatorServomotor</option>
+         <option value="quadroEsc">quadroEsc</option>
+        </optgroup>
+        <optgroup label="pwmCapture">
+         <option value="pwmCapture">pwmCapture</option>
+        </optgroup>
+       </select></p>
+
+      <p><strong>S2</strong></p>
+       <p><select name="S2" v-model = "s2">
+         <option value="angularServomotor">angularServomotor</option>
+         <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+         <option value="quadroMotor">quadroMotor</option>
+         <option value="manipulatorServomotor">manipulatorServomotor</option>
+         <option value="quadroEsc">quadroEsc</option>
+        </optgroup>
+        <optgroup label="pwmCapture">
+         <option value="pwmCapture">pwmCapture</option>
+        </optgroup>
+       </select></p>
+
+       <p><strong>S3</strong></p>
+        <p><select name="S3" v-model = "s3">
+          <option value="angularServomotor">angularServomotor</option>
+          <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+          <option value="quadroMotor">quadroMotor</option>
+          <option value="manipulatorServomotor">manipulatorServomotor</option>
+          <option value="quadroEsc">quadroEsc</option>
+         </optgroup>
+         <optgroup label="pwmCapture">
+          <option value="pwmCapture">pwmCapture</option>
+         </optgroup>
+        </select></p>
+
+        <p><strong>S4</strong></p>
+         <p><select name="S4" v-model = "s4">
+           <option value="angularServomotor">angularServomotor</option>
+           <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+           <option value="quadroMotor">quadroMotor</option>
+           <option value="manipulatorServomotor">manipulatorServomotor</option>
+           <option value="quadroEsc">quadroEsc</option>
+          </optgroup>
+          <optgroup label="pwmCapture">
+           <option value="pwmCapture">pwmCapture</option>
+          </optgroup>
+         </select></p>
+
+         <p><strong>S5</strong></p>
+          <p><select name="S5" v-model = "s5">
+            <option value="angularServomotor">angularServomotor</option>
+            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+            <option value="quadroMotor">quadroMotor</option>
+            <option value="manipulatorServomotor">manipulatorServomotor</option>
+            <option value="quadroEsc">quadroEsc</option>
+           </optgroup>
+           <optgroup label="pwmCapture">
+            <option value="pwmCapture">pwmCapture</option>
+           </optgroup>
+          </select></p>
+
+          <p><strong>S6</strong></p>
+           <p><select name="S6" v-model = "s6">
+             <option value="angularServomotor">angularServomotor</option>
+             <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+             <option value="quadroMotor">quadroMotor</option>
+             <option value="manipulatorServomotor">manipulatorServomotor</option>
+             <option value="quadroEsc">quadroEsc</option>
+            </optgroup>
+            <optgroup label="pwmCapture">
+             <option value="pwmCapture">pwmCapture</option>
+            </optgroup>
+           </select></p>
+
+
+           <p><strong>M1</strong></p>
+           <p><select name="M1" v-model = "m1">
+            <optgroup label="powerMotor">
+             <option value="motor350">motor350</option>
+             <option value="jga25-371">jga25-371</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>M2</strong></p>
+           <p><select name="M2" v-model = "m2">
+            <optgroup label="powerMotor">
+             <option value="motor350">motor350</option>
+             <option value="jga25-371">jga25-371</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>M3</strong></p>
+           <p><select name="M3" v-model = "m3">
+            <optgroup label="powerMotor">
+             <option value="motor350">motor350</option>
+             <option value="jga25-371">jga25-371</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>M4</strong></p>
+           <p><select name="M4" v-model = "m4">
+            <optgroup label="powerMotor">
+             <option value="motor350">motor350</option>
+             <option value="jga25-371">jga25-371</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>A1</strong></p>
+           <form>
+           <p><select name="A1" v-model = "a1">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>A2</strong></p>
+           <form>
+           <p><select name="A2" v-model = "a2">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>A3</strong></p>
+           <form>
+           <p><select name="A3" v-model = "a3">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>A4</strong></p>
+           <form>
+           <p><select name="A4" v-model = "a4">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>A5</strong></p>
+           <form>
+           <p><select name="A5" v-model = "a5">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>A6</strong></p>
+           <form>
+           <p><select name="A6" v-model = "a6">
+            <optgroup label="analogSensor">
+             <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+             <option value="touchSensor">touchSensor</option>
+             <option value="lightSensor">lightSensor</option>
+            </optgroup>
+           </select></p>
+           </form>
+
+           <p><strong>E1</strong></p>
+           <p><select name="E1"  v-model = "e1">
+            <optgroup label="encoder">
+             <option value="encoder95">encoder95</option>
+             <option value="encoder126">encoder126</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>E2</strong></p>
+           <p><select name="E2"  v-model = "e2">
+            <optgroup label="encoder">
+             <option value="encoder95">encoder95</option>
+             <option value="encoder126">encoder126</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>E3</strong></p>
+           <p><select name="E3"  v-model = "e3">
+            <optgroup label="encoder">
+             <option value="encoder95">encoder95</option>
+             <option value="encoder126">encoder126</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>E4</strong></p>
+           <p><select name="E4"  v-model = "e4">
+            <optgroup label="encoder">
+             <option value="encoder95">encoder95</option>
+             <option value="encoder126">encoder126</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>D1</strong></p>
+           <p><select name="D1"  v-model = "d1">
+            <optgroup label="rangeSensor">
+             <option value="sonarSensor">sonarSensor</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>D2</strong></p>
+           <p><select name="D2"  v-model = "d2">
+            <optgroup label="rangeSensor">
+             <option value="sonarSensor">sonarSensor</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>D3</strong></p>
+           <p><select name="D3" v-model = "d3">
+            <optgroup label="digitalSensor ">
+             <option value="volumeSensor">volumeSensor</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>video1</strong></p>
+           <p><select name="video1"  v-model = "video1">
+            <optgroup label="lineSensor">
+            </optgroup>
+            <optgroup label="objectSensor">
+            </optgroup>
+            <optgroup label="colorSensor">
+             <option value="colorSensor3x3">colorSensor3x3</option>
+            </optgroup>
+            <optgroup label="camera">
+             <option value="photo">photo</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>video2</strong></p>
+           <p><select name="video2"  v-model = "video2">
+            <optgroup label="lineSensor">
+            </optgroup>
+            <optgroup label="objectSensor">
+            </optgroup>
+            <optgroup label="colorSensor">
+             <option value="colorSensor3x3">colorSensor3x3</option>
+            </optgroup>
+            <optgroup label="camera">
+             <option value="photo">photo</option>
+            </optgroup>
+           </select></p>
+
+           <p><strong>gyroscope</strong></p>
+           <p><select name="gyroscope" v-model = "gyroscope">
+             <option value="ON">ON</option>
+             <option value="OFF">OFF</option>
+           </select></p>
+
+           <p><strong>accelerometer</strong></p>
+           <p><select name="accelerometer" v-model = "accelerometer">
+             <option value="ON">ON</option>
+             <option value="OFF">OFF</option>
+           </select></p>
+
+        <input type="button" @click="getHTTPS()">
+    </div>
+
+    <script src = "main.js"> </script>
+  </body>
+</html>
