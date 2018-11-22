@@ -1,4 +1,4 @@
-const app2 = new Vue({
+const app = new Vue({
     el: '#app',
     data: {
         texts: {
@@ -13,7 +13,11 @@ const app2 = new Vue({
                 'save': 'Сохранить',
                 'en': 'Англ',
                 'ru': 'Рус',
-                'default' : 'Станадартные настройки'
+                'default' : 'Станадартные настройки',
+                'confirmOffer' : 'Вы действительно хотите сохранить настройки?',
+                'yes' : 'Да',
+                'no' : 'Нет',
+                'confirm' : 'Подтверждение'
 
             },
             'en': {
@@ -27,7 +31,11 @@ const app2 = new Vue({
                 'save': 'Save',
                 'en': 'En',
                 'ru': 'Ru',
-                'default' : 'Default settings'
+                'default' : 'Default settings',
+                'confirmOffer' : 'Do you really want to save the settings?',
+                'yes' : 'Yes',
+                'no' : 'No',
+                'confirm' : 'Confirm'
             }
         },
         lang: 'en',
@@ -50,7 +58,7 @@ const app2 = new Vue({
         e2: "encoder95",
         e3: "encoder95",
         e4: "encoder95",
-	m1: "motor350",
+        m1: "motor350",
         m2: "motor350",
         m3: "motor350",
         m4: "motor350",
@@ -61,15 +69,15 @@ const app2 = new Vue({
     },
     methods: {
         getHTTPS() {
-        	var xhr = new XMLHttpRequest();
-		xhr.open("post", "/cgi-bin/config-writer.sh"); 
-		xhr.setRequestHeader('Content-Type', 'text-plain');
-	
-		var params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", "/cgi-bin/config-writer.sh");
+            xhr.setRequestHeader('Content-Type', 'text-plain');
 
-		xhr.send(params);
-		
-		//window.location.href = `s1=${this.s1}&s2=`
+            var params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
+
+            xhr.send(params);
+
+            //window.location.href = `s1=${this.s1}&s2=`
         },
         changeLang(lang) {
             this.lang = lang;
@@ -78,7 +86,7 @@ const app2 = new Vue({
             window.location.href = `https://google.com/gyroscope=${this.gyroscope}/accelerometer=${this.accelerometer}`
         },
         defaultPorts () {
-	    this.s1 = "angularServomotor";
+            this.s1 = "angularServomotor";
             this.s2 = "angularServomotor";
             this.s3 = "angularServomotor";
             this.s4 = "angularServomotor";
@@ -102,8 +110,8 @@ const app2 = new Vue({
             this.m3 = "motor350";
             this.m4 = "motor350";
             this.video1 = "lineSensor";
-	    this.video2 = "photo";     
-	},
+            this.video2 = "photo";
+        },
         defaultGA () {
             this.gyroscope = "ON";
             this.accelerometer = "ON";
