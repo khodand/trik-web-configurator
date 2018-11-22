@@ -4,18 +4,19 @@
 <head>
     <meta charset="utf-8">
     <title>Configurator</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" text="text/css" href="css/bootstrap.css">
 
     <style>
         .main-color-green {
             background-color: #009933;
         }
+
         .main-color-blue {
             background-color: #001A42;
         }
+
         .logo {
-            width: 50px;
+             width: 50px;
         }
         .logoF {
             width: 25px;
@@ -29,7 +30,7 @@
 
 
 <body>
-<script src="https://unpkg.com/vue"></script>
+<script src="js/vue.min.js"></script>
 
 <div id="app">
 
@@ -68,283 +69,311 @@
 
     <div class="tab-content" style="padding: 20px;">
         <div class="tab-pane fade show active active" id="home">{{ texts[lang]['develop'] }}</div>
-        <div class="tab-pane fade" id="wifi">{{ texts[lang]['develop'] }}</div>
+        <div class="tab-pane fade" id="wifi">
+
+
+
+        </div>
         <div class="tab-pane fade" id="port">
 
-            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultPorts">{{ texts[lang]['default'] }}</button>
-            <!--ServoMotor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                <a class="navbar-brand" href="#">ServoMotor</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label>S1</label>
-                    <select class="form-control form-control-sm" name="S1" v-model="s1">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
+                <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultPorts">{{ texts[lang]['default'] }}</button>
+                <!--ServoMotor-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                    <a class="navbar-brand" href="#">ServoMotor</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>S1</label>
+                        <select class="form-control form-control-sm" name="S1" v-model="s1">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>S2</label>
+                        <select class="form-control form-control-sm" name="S2" v-model="s2">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>S3</label>
+                        <select class="form-control form-control-sm" name="S3" v-model="s3">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>S4</label>
+                        <select class="form-control form-control-sm" name="S4" v-model="s4">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>S5</label>
+                        <select class="form-control form-control-sm" name="S5" v-model="s5">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>S6</label>
+                        <select class="form-control form-control-sm" name="S6" v-model="s6">
+                            <option value="angularServomotor">angularServomotor</option>
+                            <option value="continuousRotationServomotor">continuousRotationServomotor</option>
+                            <option value="quadroMotor">quadroMotor</option>
+                            <option value="manipulatorServomotor">manipulatorServomotor</option>
+                            <option value="quadroEsc">quadroEsc</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label>S2</label>
-                    <select class="form-control form-control-sm" name="S2" v-model="s2">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>S3</label>
-                    <select class="form-control form-control-sm" name="S3" v-model="s3">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>S4</label>
-                    <select class="form-control form-control-sm" name="S4" v-model="s4">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>S5</label>
-                    <select class="form-control form-control-sm" name="S5" v-model="s5">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>S6</label>
-                    <select class="form-control form-control-sm" name="S6" v-model="s6">
-                        <option value="angularServomotor">angularServomotor</option>
-                        <option value="continuousRotationServomotor">continuousRotationServomotor</option>
-                        <option value="quadroMotor">quadroMotor</option>
-                        <option value="manipulatorServomotor">manipulatorServomotor</option>
-                        <option value="quadroEsc">quadroEsc</option>
-                    </select>
-                </div>
-            </div>
 
+                <!--PowerMotor-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">PowerMotor</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>M1</label>
+                        <select class="form-control form-control-sm" name="M1" v-model="m1">
+                            <option value="motor350">motor350</option>
+                            <option value="jga25-371">jga25-371</option>
+                        </select>
+                    </div>
 
-            <!--PowerMotor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">PowerMotor</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label>M1</label>
-                    <select class="form-control form-control-sm" name="M1" v-model="m1">
-                        <option value="motor350">motor350</option>
-                        <option value="jga25-371">jga25-371</option>
-                    </select>
+                    <div class="form-group col-md-3">
+                        <label>M2</label>
+                        <select class="form-control form-control-sm" name="M2" v-model="m2">
+                            <option value="motor350">motor350</option>
+                            <option value="jga25-371">jga25-371</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>M3</label>
+                        <select class="form-control form-control-sm" name="M3" v-model="m3">
+                            <option value="motor350">motor350</option>
+                            <option value="jga25-371">jga25-371</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>M4</label>
+                        <select class="form-control form-control-sm" name="M4" v-model="m4">
+                            <option value="motor350">motor350</option>
+                            <option value="jga25-371">jga25-371</option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label>M2</label>
-                    <select class="form-control form-control-sm" name="M2" v-model="m2">
-                        <option value="motor350">motor350</option>
-                        <option value="jga25-371">jga25-371</option>
-                    </select>
+                <!--analogSensor-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">AnalogSensor</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>A1</label>
+                        <select class="form-control form-control-sm" name="A1" v-model="a1">
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>A2</label>
+                        <select class="form-control form-control-sm" name="A2" v-model="a2">
+
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>A3</label>
+                        <select class="form-control form-control-sm" name="A3" v-model="a3">
+
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>A4</label>
+                        <select class="form-control form-control-sm" name="A4" v-model="a4">
+
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>A5</label>
+                        <select class="form-control form-control-sm" name="A5" v-model="a5">
+
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>A6</label>
+                        <select class="form-control form-control-sm" name="A6" v-model="a6">
+                            <option value="sharpGP2Sensor">sharpGP2Sensor</option>
+                            <option value="touchSensor">touchSensor</option>
+                            <option value="lightSensor">lightSensor</option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label>M3</label>
-                    <select class="form-control form-control-sm" name="M3" v-model="m3">
-                        <option value="motor350">motor350</option>
-                        <option value="jga25-371">jga25-371</option>
-                    </select>
+
+                <!--encoder-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Encoder</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>E1</label>
+                        <select class="form-control form-control-sm" name="E1" v-model="e1">
+                            <option value="encoder95">encoder95</option>
+                            <option value="encoder126">encoder126</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>E2</label>
+                        <select class="form-control form-control-sm" name="E2" v-model="e2">
+                            <option value="encoder95">encoder95</option>
+                            <option value="encoder126">encoder126</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>E3</label>
+                        <select class="form-control form-control-sm" name="E3" v-model="e3">
+                            <option value="encoder95">encoder95</option>
+                            <option value="encoder126">encoder126</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>E4</label>
+                        <select class="form-control form-control-sm" name="E4" v-model="e4">
+                            <option value="encoder95">encoder95</option>
+                            <option value="encoder126">encoder126</option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label>M4</label>
-                    <select class="form-control form-control-sm" name="M4" v-model="m4">
-                        <option value="motor350">motor350</option>
-                        <option value="jga25-371">jga25-371</option>
-                    </select>
+                <!--RangeSensor-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">RangeSensor</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>D1</label>
+                        <select class="form-control form-control-sm" name="D1" v-model="d1">
+                            <option value="sonarSensor">sonarSensor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>D2</label>
+                        <select class="form-control form-control-sm" name="D2" v-model="d2">
+                            <option value="sonarSensor">sonarSensor</option>
+                        </select>
+                    </div>
                 </div>
 
-            </div>
-
-            <!--analogSensor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">AnalogSensor</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label>A1</label>
-                    <select class="form-control form-control-sm" name="A1" v-model="a1">
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
+                <!--DigitalSensor-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">DigitalSensor(нужен ли?)</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>D3</label>
+                        <select class="form-control form-control-sm" name="D3" v-model="d3">
+                            <option value="volumeSensor">volumeSensor</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label>A2</label>
-                    <select class="form-control form-control-sm" name="A2" v-model="a2">
 
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
+                <!--video1/video2-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">video1/video2</a>
+                </nav>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>video1</label>
+                        <select class="form-control form-control-sm" name="video1" v-model="video1">
+                            <option value="colorSensor3x3">colorSensor3x3</option>
+                            <option value="lineSensor">lineSensor</option>
+                            <option value="photo">photo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>video2</label>
+                        <select class="form-control form-control-sm" name="video2" v-model="video2">
+                            <option value="colorSensor3x3">colorSensor3x3</option>
+                            <option value="lineSensor">lineSensor</option>
+                            <option value="photo">photo</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label>A3</label>
-                    <select class="form-control form-control-sm" name="A3" v-model="a3">
-
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>A4</label>
-                    <select class="form-control form-control-sm" name="A4" v-model="a4">
-
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>A5</label>
-                    <select class="form-control form-control-sm" name="A5" v-model="a5">
-
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>A6</label>
-                    <select class="form-control form-control-sm" name="A6" v-model="a6">
-                        <option value="sharpGP2Sensor">sharpGP2Sensor</option>
-                        <option value="touchSensor">touchSensor</option>
-                        <option value="lightSensor">lightSensor</option>
-                    </select>
-                </div>
-
-            </div>
-
-
-            <!--encoder-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Encoder</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label>E1</label>
-                    <select class="form-control form-control-sm" name="E1" v-model="e1">
-                        <option value="encoder95">encoder95</option>
-                        <option value="encoder126">encoder126</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label>E2</label>
-                    <select class="form-control form-control-sm" name="E2" v-model="e2">
-                        <option value="encoder95">encoder95</option>
-                        <option value="encoder126">encoder126</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label>E3</label>
-                    <select class="form-control form-control-sm" name="E3" v-model="e3">
-                        <option value="encoder95">encoder95</option>
-                        <option value="encoder126">encoder126</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label>E4</label>
-                    <select class="form-control form-control-sm" name="E4" v-model="e4">
-                        <option value="encoder95">encoder95</option>
-                        <option value="encoder126">encoder126</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <!--RangeSensor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">RangeSensor</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label>D1</label>
-                    <select class="form-control form-control-sm" name="D1" v-model="d1">
-                        <option value="sonarSensor">sonarSensor</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label>D2</label>
-                    <select class="form-control form-control-sm" name="D2" v-model="d2">
-                        <option value="sonarSensor">sonarSensor</option>
-                    </select>
-                </div>
-            </div>
-
-            <!--DigitalSensor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">DigitalSensor(нужен ли?)</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label>D3</label>
-                    <select class="form-control form-control-sm" name="D3" v-model="d3">
-                        <option value="volumeSensor">volumeSensor</option>
-                    </select>
-                </div>
-            </div>
-
-
-            <!--video1/video2-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">video1/video2</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label>video1</label>
-                    <select class="form-control form-control-sm" name="video1" v-model="video1">
-                        <option value="colorSensor3x3">colorSensor3x3</option>
-                        <option value="photo">photo</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label>video2</label>
-                    <select class="form-control form-control-sm" name="video2" v-model="video2">
-                        <option value="colorSensor3x3">colorSensor3x3</option>
-                        <option value="photo">photo</option>
-                    </select>
-                </div>
-            </div>
-
-            <button type="button" name="button" class="btn btn-success btn-md btn-block" @click="getHTTPS()">
+            <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal" data-target="#ModalCenter">
                 <i class="glyphicon glyphicon-ok"></i>
                 {{ texts[lang]['save'] }}
             </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">{{ texts[lang]['confirm'] }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ texts[lang]['confirmOffer'] }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" >{{ texts[lang]['no'] }}</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getHTTPS()" >{{ texts[lang]['yes'] }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="tab-pane fade" id="ga">
             <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultGA">{{ texts[lang]['default'] }}</button>
@@ -364,10 +393,32 @@
                         <option value="OFF">OFF</option>
                     </select>
                 </div>
-                <button type="button" name="button" class="btn btn-success btn-md btn-block" @click="getHTTPS1()">
+
+                <button type="button" class="btn btn-success btn-md btn-block" data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="glyphicon glyphicon-ok"></i>
                     {{ texts[lang]['save'] }}
                 </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">{{ texts[lang]['confirm'] }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ texts[lang]['confirmOffer'] }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" >{{ texts[lang]['no'] }}</button>
+                                <button type="button" class="btn btn-success" @click="getHTTPS1()" data-dismiss="modal">{{ texts[lang]['yes'] }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -375,15 +426,8 @@
         <div class="tab-pane fade" id="menu6">{{ texts[lang]['develop'] }}</div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+<script src="js/jQueryCompressed.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
