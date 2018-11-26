@@ -71,7 +71,37 @@
         <div class="tab-pane fade show active active" id="home">{{ texts[lang]['develop'] }}</div>
         <div class="tab-pane fade" id="wifi">
 
+            <!--<h1>Wi-Fi Settings</h1>
+            <div id="success_msg" class="success">Success!</div>
+            <div id="error_msg" class="error"></div>
+            <form id="submit-form" action="javascript:void(0);">
+                <label for="essid">Wi-Fi name (SSID):</label>
+                <input type="text" id="essid" name="essid"/>
 
+                <label for="password">Password (Keep empty if no password):</label>
+                <input type="password" id="password" name="password"/>
+
+                <input class="main-button" type="submit" onclick="handle()" value="Submit">
+            </form>-->
+
+            <div id="success_msg" class="success">Success!</div>
+            <div id="error_msg" class="error"></div>
+            <form id="submit-form" action="javascript:void(0);">
+                <div class="form-group">
+                    <label for="essid">Email address</label>
+                    <input type="email" class="form-control" id="essid" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="handle()">Submit</button>
+            </form>
 
         </div>
         <div class="tab-pane fade" id="port">
@@ -428,6 +458,7 @@
 </div>
 <script src="js/jQueryCompressed.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/handler.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
