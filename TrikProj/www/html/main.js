@@ -68,37 +68,43 @@ const app = new Vue({
         accelerometer: "ON"
     },
     created: function () {
-        var x = ("angularServomotor quadroMotor quadroMotor angularServomotor angularServomotor angularServomotor " +
-            "sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor " +
-            "sonarSensor sonarSensor volumeSensor " +
-            "encoder126 encoder126 encoder126 encoder126 " +
-            "jga25-371 jga25-371 jga25-371 jga25-371 " +
-            "lineSensor lineSensor").split(' ');
-        this.s1 =x[0];
+	var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/cgi-bin/get_current.sh", false);
+	    xhr.setRequestHeader('Content-Type', 'text-plain');
+	    xhr.send();
+	var x = "asdas";
+		if (xhr.status != 200) {
+    			alert('Error ' + xhr.status + ': ' + xhr.statusText);
+  		} else {
+			var text = xhr.responseText;
+			x = text.split(' ');
+  		}
+	this.s1 = x[0];
         this.s2 = x[1];
         this.s3 = x[2];
         this.s4 = x[3];
         this.s5 = x[4];
         this.s6 = x[5];
-        this.a1 = x[6];
-        this.a2 = x[7];
-        this.a3 = x[8];
-        this.a4 = x[9];
-        this.a5 = x[10];
-        this.a6 = x[11];
-        this.d1 = x[12];
-        this.d2 = x[13];
-        this.d3 = x[14];
-        this.e1 = x[15];
-        this.e2 = x[16];
-        this.e3 = x[17];
-        this.e4 = x[18];
-        this.m1 = x[19];
-        this.m2 = x[20];
-        this.m3 = x[21];
-        this.m4 = x[22];
-        this.video1 = x[23];
-        this.video2 = x[24];
+	this.a1 = x[6];
+	this.a2 = x[7];
+	this.a3 = x[8];
+	this.a4 = x[9];
+	this.a5 = x[10];
+	this.a6 = x[11];
+	this.d1 = x[12];
+	this.d2 = x[13];
+	this.d3 = x[14];
+	this.e1 = x[15];
+	this.e2 = x[16];
+	this.e3 = x[17];
+	this.e4 = x[18];
+	this.m1 = x[19];
+	this.m2 = x[20];
+	this.m3 = x[21];
+	this.m4 = x[22];
+	this.video1 = x[23];
+	this.video2 = x[24]; 
+	
 
     },
     methods: {
@@ -110,8 +116,6 @@ const app = new Vue({
             var params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
 
             xhr.send(params);
-
-            //window.location.href = `s1=${this.s1}&s2=`
         },
         changeLang(lang) {
             this.lang = lang;

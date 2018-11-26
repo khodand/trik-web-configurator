@@ -1,7 +1,5 @@
 #!/bin/sh
 
-rm -f model_config.xml
-
 read params
 
 IFS="${IFS}&"
@@ -9,17 +7,21 @@ set $params
 
 Args="$*"
 
-cat >> model_config.xml << EOF
+cat > model_config.xml << EOF
 <config>
 	<initScript>
 	</initScript>
 
 EOF
 
+$(echo -n > current_params.txt)
+
 for i in $Args
 do
 	port=${i%=*}
 	device=${i#*=}
+	$(echo -n "$device "  >> current_params.txt)
+	
 	$(echo "	<$port>" >> model_config.xml)
 	$(echo "		<$device />" >> model_config.xml)
 	$(echo "	</$port>" >> model_config.xml)
@@ -45,3 +47,5 @@ cat >> model_config.xml << EOF
 	-->
 </config>
 EOF
+
+echo "HTTP/1.1 200 Modified"
