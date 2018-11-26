@@ -67,6 +67,40 @@ const app = new Vue({
         gyroscope: "ON",
         accelerometer: "ON"
     },
+    created: function () {
+        var x = ("angularServomotor quadroMotor quadroMotor angularServomotor angularServomotor angularServomotor " +
+            "sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor sharpGP2Sensor " +
+            "sonarSensor sonarSensor volumeSensor " +
+            "encoder126 encoder126 encoder126 encoder126 " +
+            "jga25-371 jga25-371 jga25-371 jga25-371 " +
+            "lineSensor lineSensor").split(' ');
+        this.s1 =x[0];
+        this.s2 = x[1];
+        this.s3 = x[2];
+        this.s4 = x[3];
+        this.s5 = x[4];
+        this.s6 = x[5];
+        this.a1 = x[6];
+        this.a2 = x[7];
+        this.a3 = x[8];
+        this.a4 = x[9];
+        this.a5 = x[10];
+        this.a6 = x[11];
+        this.d1 = x[12];
+        this.d2 = x[13];
+        this.d3 = x[14];
+        this.e1 = x[15];
+        this.e2 = x[16];
+        this.e3 = x[17];
+        this.e4 = x[18];
+        this.m1 = x[19];
+        this.m2 = x[20];
+        this.m3 = x[21];
+        this.m4 = x[22];
+        this.video1 = x[23];
+        this.video2 = x[24];
+
+    },
     methods: {
         getHTTPS() {
             var xhr = new XMLHttpRequest();
