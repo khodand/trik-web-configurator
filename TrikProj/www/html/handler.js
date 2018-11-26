@@ -21,7 +21,7 @@ function sendNetworkData(paramString) {
 }
 
 function handle() {
-    successMessage.style.display = 'none';
+    /*successMessage.style.display = 'none';
     errorMessage.style.display = 'none';
     var essid = document.getElementById("essid").value;
     if (!essid) {
@@ -34,8 +34,9 @@ function handle() {
     if (password) {
         paramString += "&password=" + password;
     }
-    sendNetworkData(paramString);
+    sendNetworkData(paramString);*/
+    window.location.href = `https://google.com`;
 }
 
-var successMessage = document.getElementById('success_msg');
-var errorMessage = document.getElementById('error_msg');
+//var successMessage = document.getElementById('success_msg');
+//var errorMessage = document.getElementById('error_msg');
