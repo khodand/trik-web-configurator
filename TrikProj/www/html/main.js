@@ -18,8 +18,8 @@ const app = new Vue({
                 'yes': 'Да',
                 'no': 'Нет',
                 'confirm': 'Подтверждение',
-                'frequency' : 'Частота',
-                'range' : 'Диапазон',
+                'frequency': 'Частота',
+                'range': 'Диапазон',
 
             },
             'en': {
@@ -38,8 +38,8 @@ const app = new Vue({
                 'yes': 'Yes',
                 'no': 'No',
                 'confirm': 'Confirm',
-                'frequency' : 'Frequency',
-                'range' : 'Range',
+                'frequency': 'Frequency',
+                'range': 'Range',
             }
         },
         lang: 'en',
@@ -129,7 +129,18 @@ const app = new Vue({
             this.lang = lang;
         },
         getHTTPS1() {
-            window.location.href = `https://google.com/gyroscope=${this.gyroscope}/accelerometer=${this.accelerometer}/gyroFreq=${this.gyroFreq}/gyroRange=${this.gyroRange}/accelFreq=${this.accelFreq}/accelRange=${this.accelRange}`
+            var gyro_xhr = new XMLHttpRequest();
+            gyro_xhr.open("post", "/cgi-bin/gyromod.sh");
+            gyro_xhr.setRequestHeader('Content-Type', 'text-plain');
+
+            gyro_xhr.send(`${this.gyroscope}`);
+
+
+            var acc_xhr = new XMLHttpRequest();
+            acc_xhr.open("post", "/cgi-bin/accelermod.sh");
+            acc_xhr.setRequestHeader('Content-Type', 'text-plain');
+
+            acc_xhr.send(`${this.accelerometer}`);
         },
         defaultPorts() {
             this.s1 = "angularServomotor";
