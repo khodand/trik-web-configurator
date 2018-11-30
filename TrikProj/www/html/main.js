@@ -13,11 +13,13 @@ const app = new Vue({
                 'save': 'Сохранить',
                 'en': 'Англ',
                 'ru': 'Рус',
-                'default' : 'Станадартные настройки',
-                'confirmOffer' : 'Вы действительно хотите сохранить настройки?',
-                'yes' : 'Да',
-                'no' : 'Нет',
-                'confirm' : 'Подтверждение'
+                'default': 'Станадартные настройки',
+                'confirmOffer': 'Вы действительно хотите сохранить настройки?',
+                'yes': 'Да',
+                'no': 'Нет',
+                'confirm': 'Подтверждение',
+                'frequency' : 'Частота',
+                'range' : 'Диапазон',
 
             },
             'en': {
@@ -31,11 +33,13 @@ const app = new Vue({
                 'save': 'Save',
                 'en': 'En',
                 'ru': 'Ru',
-                'default' : 'Default settings',
-                'confirmOffer' : 'Do you really want to save the settings?',
-                'yes' : 'Yes',
-                'no' : 'No',
-                'confirm' : 'Confirm'
+                'default': 'Default settings',
+                'confirmOffer': 'Do you really want to save the settings?',
+                'yes': 'Yes',
+                'no': 'No',
+                'confirm': 'Confirm',
+                'frequency' : 'Frequency',
+                'range' : 'Range',
             }
         },
         lang: 'en',
@@ -65,20 +69,24 @@ const app = new Vue({
         video1: "lineSensor",
         video2: "photo",
         gyroscope: "ON",
-        accelerometer: "ON"
+        accelerometer: "ON",
+        gyroFreq: "95",
+        gyroRange: "2000",
+        accelFreq: "50",
+        accelRange: "2G"
     },
     created: function () {
         var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/cgi-bin/get_current.sh", false);
-            xhr.setRequestHeader('Content-Type', 'text-plain');
-            xhr.send();
+        xhr.open("GET", "/cgi-bin/get_current.sh", false);
+        xhr.setRequestHeader('Content-Type', 'text-plain');
+        xhr.send();
         var x = "asdas";
-                if (xhr.status != 200) {
-                        alert('Error ' + xhr.status + ': ' + xhr.statusText);
-                } else {
-                        var text = xhr.responseText;
-                        x = text.split(' ');
-                }
+        if (xhr.status != 200) {
+            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+            var text = xhr.responseText;
+            x = text.split(' ');
+        }
         this.s1 = x[0];
         this.s2 = x[1];
         this.s3 = x[2];
@@ -113,8 +121,7 @@ const app = new Vue({
             xhr.open("post", "/cgi-bin/config-writer.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
 
-            var params =
-`s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
+            var params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
 
             xhr.send(params);
         },
@@ -122,20 +129,9 @@ const app = new Vue({
             this.lang = lang;
         },
         getHTTPS1() {
-                var gyro_xhr = new XMLHttpRequest();
-                gyro_xhr.open("post", "/cgi-bin/gyromod.sh");
-                gyro_xhr.setRequestHeader('Content-Type', 'text-plain');
-
-                gyro_xhr.send(`${this.gyroscope}`);
-
-
-                var acc_xhr = new XMLHttpRequest();
-                acc_xhr.open("post", "/cgi-bin/accelermod.sh");
-                acc_xhr.setRequestHeader('Content-Type', 'text-plain');
-
-                acc_xhr.send(`${this.accelerometer}`);
+            window.location.href = `https://google.com/gyroscope=${this.gyroscope}/accelerometer=${this.accelerometer}/gyroFreq=${this.gyroFreq}/gyroRange=${this.gyroRange}/accelFreq=${this.accelFreq}/accelRange=${this.accelRange}`
         },
-        defaultPorts () {
+        defaultPorts() {
             this.s1 = "angularServomotor";
             this.s2 = "angularServomotor";
             this.s3 = "angularServomotor";
@@ -162,9 +158,13 @@ const app = new Vue({
             this.video1 = "lineSensor";
             this.video2 = "photo";
         },
-        defaultGA () {
+        defaultGA() {
             this.gyroscope = "ON";
             this.accelerometer = "ON";
+            this.gyroFreq = "95";
+            this.gyroRange = "2000";
+            this.accelFreq = "50";
+            this.accelRange = "2G";
         }
 
     }

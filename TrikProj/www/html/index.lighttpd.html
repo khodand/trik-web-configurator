@@ -15,6 +15,20 @@
             background-color: #001A42;
         }
 
+        .navBlue{
+            background-color: #009933;
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+        }
+
         .logo {
             width: 50px;
         }
@@ -28,57 +42,70 @@
             bottom: 15%; /* Положение от нижнего края */
             line-height: 100%;
         }
-    </style>
 
+        @font-face{
+            font-family: Montserrat-BlackItalic;
+            src: url('font/Montserrat-Bold.ttf');
+
+            font-weight: normal;
+
+            font-style: normal;
+        }
+
+        .main-navigation {
+            font-family: 'Montserrat-BlackItalic';
+        }
+
+    </style>
 
 <body>
 <script src="js/vue.min.js"></script>
 
 <div id="app">
 
-    <nav class="navbar navbar-expand-lg bg-success navbar-dark">
-        <a class="navbar-brand" href="#">{{ texts[lang]['configurator'] }}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001A42">
+      <!--  <p><img src="img/logo-eng-lightgreen-purple-1000x1000.png" width=70" hspace="50" align="left"></p>-->
+        <a href="#" class="navbar-left mr-3"><img src="img/logo-eng-lightgreen-purple-1000x1000.png"  width="80"    ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #009933">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav nav-pills navbar-nav mr-auto">
-                <li class="nav-item bg-dark">
-                    <a class="nav-link active bg-dark text-white" data-toggle="pill" href="#home">{{ texts[lang]['home']
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link active main-color-blue text-white" data-toggle="pill" href="#home">{{ texts[lang]['home']
                         }}</a>
-                <li class="nav-item bg-dark">
-                    <a class="nav-link bg-dark text-white" data-toggle="pill" href="#wifi">Wifi {{
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#wifi">Wifi {{
                         texts[lang]['configurator'] }}</a>
                 </li>
-                <li class="nav-item bg-dark">
-                    <a class="nav-link bg-dark text-white" data-toggle="pill" href="#port">{{ texts[lang]['port'] }}</a>
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#port">{{ texts[lang]['port'] }}</a>
                 </li>
-                <li class="nav-item bg-dark">
-                    <a class="nav-link bg-dark text-white" data-toggle="pill" href="#ga">{{ texts[lang]['gyroscope']
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#ga">{{ texts[lang]['gyroscope']
                         }}&{{ texts[lang]['accelerometer'] }}</a>
                 </li>
-                <li class="nav-item bg-dark">
-                    <a class="nav-link bg-dark text-white" data-toggle="pill" href="#menu5">{{ texts[lang]['menu'] }}
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu5">{{ texts[lang]['menu'] }}
                         5</a>
                 </li>
-                <li class="nav-item bg-dark">
-                    <a class="nav-link bg-dark text-white" data-toggle="pill" href="#menu6">{{ texts[lang]['menu'] }}
+                <li class="nav-item main-color-blue">
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu6">{{ texts[lang]['menu'] }}
                         6</a>
                 </li>
             </ul>
         </div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" @click="changeLang('en')"
+        <div class="btn-group btn-group-toggle" role="buttons" aria-label="Basic example">
+            <button type="button" class="btn btn-success active" @click="changeLang('en')"
                     v-bind:class="{ active: lang=='en' }">{{ texts[lang]['en'] }}
             </button>
-            <button type="button" class="btn btn-secondary" @click="changeLang('ru')"
+            <button type="button" class="btn btn-success" @click="changeLang('ru')"
                     v-bind:class="{ active: lang=='ru' }">{{ texts[lang]['ru'] }}
             </button>
         </div>
     </nav>
 
-    <div class="tab-content" style="padding: 20px;">
+    <div class="tab-content main-navigation" style="padding: 20px;">
         <div class="tab-pane fade show active active" id="home">{{ texts[lang]['develop'] }}</div>
         <div class="tab-pane fade" id="wifi">
 
@@ -434,6 +461,23 @@
                         <option value="ON">ON</option>
                         <option value="OFF">OFF</option>
                     </select>
+
+                    <div v-if="gyroscope === 'ON'">
+                        <label>{{ texts[lang]['frequency'] }}</label>
+                        <select class="form-control form-control-sm" name="gyroFreq" v-model="gyroFreq">
+                            <option value="95">95</option>
+                            <option value="190">190</option>
+                            <option value="380">380</option>
+                            <option value="760">760</option>
+                        </select>
+                        <label>{{ texts[lang]['range'] }}</label>
+                        <select class="form-control form-control-sm" name="gyroRange" v-model="gyroRange">
+                            <option value="250">250</option>
+                            <option value="500">500</option>
+                            <option value="2000">2000</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="form-group col-md-6">
@@ -442,7 +486,30 @@
                         <option value="ON">ON</option>
                         <option value="OFF">OFF</option>
                     </select>
+
+                    <div v-if="accelerometer === 'ON'">
+
+                        <label>{{ texts[lang]['frequency'] }}</label>
+                        <select class="form-control form-control-sm" name="accelFreq" v-model="accelFreq">
+                            <option value="800">800</option>
+                            <option value="400">400</option>
+                            <option value="200">200</option>
+                            <option value="100">100</option>
+                            <option value="50">50</option>
+                            <option value="12_5">12_5</option>
+                            <option value="6_25">6_25</option>
+                            <option value="1_56">1_56</option>
+                        </select>
+                        <label>{{ texts[lang]['range'] }}</label>
+                        <select class="form-control form-control-sm" name="accelRange" v-model="accelRange">
+                            <option value="2G">2G</option>
+                            <option value="4G">4G</option>
+                            <option value="8G">8G</option>
+                        </select>
+                    </div>
+
                 </div>
+
 
                 <button type="button" class="btn btn-success btn-md btn-block" data-toggle="modal"
                         data-target="#exampleModalCenter">
