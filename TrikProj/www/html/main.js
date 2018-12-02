@@ -1,4 +1,4 @@
-const app = new Vue({
+    const app = new Vue({
         el: '#app',
         data: {
             texts: {
@@ -21,7 +21,8 @@ const app = new Vue({
                     'frequency': 'Частота',
                     'range': 'Диапазон',
                     'cancel': 'Отменить',
-                    'changeNameWifi': 'Поменять имя Wifi'
+                    'changeNameWifi': 'Поменять имя Wifi',
+                    'state' : 'Состояние'
                 },
                 'en': {
                     'configurator': 'Сonfigurator',
@@ -42,7 +43,8 @@ const app = new Vue({
                     'frequency': 'Frequency',
                     'range': 'Range',
                     'cancel': 'Cancel',
-                    'changeNameWifi': 'Edit wifi name'
+                    'changeNameWifi': 'Edit wifi name',
+                    'state' : 'State'
                 }
             },
             lang: 'en',
