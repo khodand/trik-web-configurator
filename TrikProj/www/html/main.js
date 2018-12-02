@@ -20,7 +20,8 @@ const app = new Vue({
                 'confirm': 'Подтверждение',
                 'frequency': 'Частота',
                 'range': 'Диапазон',
-
+                'cancel': 'Отменить',
+                'changeNameWifi': 'Поменять имя Wifi'
             },
             'en': {
                 'configurator': 'Сonfigurator',
@@ -40,6 +41,8 @@ const app = new Vue({
                 'confirm': 'Confirm',
                 'frequency': 'Frequency',
                 'range': 'Range',
+                'cancel': 'Cancel',
+                'changeNameWifi': 'Edit wifi name'
             }
         },
         lang: 'en',
@@ -73,7 +76,8 @@ const app = new Vue({
         gyroFreq: "95",
         gyroRange: "2000",
         accelFreq: "50",
-        accelRange: "2G"
+        accelRange: "2G",
+        wifiName: ""
     },
     created: function () {
         var xhr = new XMLHttpRequest();
@@ -176,6 +180,9 @@ const app = new Vue({
             this.gyroRange = "2000";
             this.accelFreq = "50";
             this.accelRange = "2G";
+        },
+        edit() {
+            window.location.href = `https://google.com/gyroscope=${this.wifiName}`
         }
 
     }
