@@ -75,8 +75,7 @@
                     <a class="nav-link active main-color-blue text-white" data-toggle="pill" href="#home">{{ texts[lang]['home']
                         }}</a>
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#wifi">Wifi {{
-                        texts[lang]['configurator'] }}</a>
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#wifi">Wifi</a>
                 </li>
                 <li class="nav-item main-color-blue">
                     <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#port">{{ texts[lang]['port'] }}</a>
@@ -138,6 +137,32 @@
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="handle()">Submit</button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditNameWifi">{{ texts[lang]['changeNameWifi'] }}</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="EditNameWifi" tabindex="-1" role="dialog" aria-labelledby="exampleEditNameWifi" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleEditNameWifi">{{ texts[lang]['changeNameWifi'] }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="input-group mb-3">
+                                    <input v-model="wifiName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['cancel'] }}</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="edit()">{{ texts[lang]['save'] }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
 
         </div>
