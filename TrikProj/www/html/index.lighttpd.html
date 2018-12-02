@@ -17,7 +17,7 @@
             background-color: #001A42;
         }
 
-        .navBlue{
+        .navBlue {
             background-color: #009933;
             position: relative;
             display: -ms-flexbox;
@@ -45,7 +45,7 @@
             line-height: 100%;
         }
 
-        @font-face{
+        @font-face {
             font-family: Montserrat-BlackItalic;
             src: url('font/Montserrat-Bold.ttf');
 
@@ -66,38 +66,45 @@
 <div id="app">
 
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001A42">
-      <!--  <p><img src="img/logo-eng-lightgreen-purple-1000x1000.png" width=70" hspace="50" align="left"></p>-->
-        <a href="#" class="navbar-left mr-3"><img src="img/logo-eng-lightgreen-purple-1000x1000.png"  width="80"    ></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #009933">
+        <!--  <p><img src="img/logo-eng-lightgreen-purple-1000x1000.png" width=70" hspace="50" align="left"></p>-->
+        <a href="#" class="navbar-left mr-3"><img src="img/logo-eng-lightgreen-purple-1000x1000.png" width="80"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                style="background-color: #009933">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav nav-pills navbar-nav mr-auto">
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link active main-color-blue text-white" data-toggle="pill" href="#home">{{ texts[lang]['home']
+                    <a class="nav-link active main-color-blue text-white" data-toggle="pill" href="#home">{{
+                        texts[lang]['home']
                         }}</a>
                 <li class="nav-item main-color-blue">
                     <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#wifi">Wifi</a>
                 </li>
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#port">{{ texts[lang]['port'] }}</a>
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#port">{{
+                        texts[lang]['port'] }}</a>
                 </li>
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#ga">{{ texts[lang]['gyroscope']
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#ga">{{
+                        texts[lang]['gyroscope']
                         }}&{{ texts[lang]['accelerometer'] }}</a>
                 </li>
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu5">{{ texts[lang]['menu'] }}
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu5">{{
+                        texts[lang]['menu'] }}
                         5</a>
                 </li>
                 <li class="nav-item main-color-blue">
-                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu6">{{ texts[lang]['menu'] }}
+                    <a class="nav-link main-color-blue text-white" data-toggle="pill" href="#menu6">{{
+                        texts[lang]['menu'] }}
                         6</a>
                 </li>
             </ul>
         </div>
         <div class="btn-group btn-group-toggle" role="buttons" aria-label="Basic example">
-            <button type="button" class="btn btn-success active" @click="changeLang('en')"
+            <button type="button" class="btn btn-success" @click="changeLang('en')"
                     v-bind:class="{ active: lang=='en' }">{{ texts[lang]['en'] }}
             </button>
             <button type="button" class="btn btn-success" @click="changeLang('ru')"
@@ -140,14 +147,18 @@
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="handle()">Submit</button>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditNameWifi">{{ texts[lang]['changeNameWifi'] }}</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditNameWifi">{{
+                    texts[lang]['changeNameWifi'] }}
+                </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="EditNameWifi" tabindex="-1" role="dialog" aria-labelledby="exampleEditNameWifi" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                <div class="modal fade" id="EditNameWifi" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleEditNameWifi" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleEditNameWifi">{{ texts[lang]['changeNameWifi'] }}</h5>
+                                <h5 class="modal-title" id="exampleEditNameWifi">{{ texts[lang]['changeNameWifi']
+                                    }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -155,12 +166,18 @@
                             <div class="modal-body">
 
                                 <div class="input-group mb-3">
-                                    <input v-model="wifiName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    <input v-model="wifiName" type="text" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-default">
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['cancel'] }}</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="edit()">{{ texts[lang]['save'] }}</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                    texts[lang]['cancel'] }}
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="editWIFIName()">{{
+                                    texts[lang]['save'] }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -352,15 +369,20 @@
                 <a class="navbar-brand" href="#">Encoder</a>
             </nav>
             <div class="row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-9">
                     <label>E1</label>
                     <select class="form-control form-control-sm" name="E1" v-model="e1">
                         <option value="encoder95">encoder95</option>
                         <option value="encoder126">encoder126</option>
                     </select>
                 </div>
-
                 <div class="form-group col-md-3">
+                    <br>
+                    <input type="checkbox" id="e1" v-model="e1State" true-value="Invert" false-value="Not Invert">
+                    <label for="e1">{{e1State}}</label>
+                </div>
+
+                <div class="form-group col-md-9">
                     <label>E2</label>
                     <select class="form-control form-control-sm" name="E2" v-model="e2">
                         <option value="encoder95">encoder95</option>
@@ -369,6 +391,12 @@
                 </div>
 
                 <div class="form-group col-md-3">
+                    <br>
+                    <input type="checkbox" id="e2" v-model="e2State" true-value="Invert" false-value="Not Invert">
+                    <label for="e2">{{e2State}}</label>
+                </div>
+
+                <div class="form-group col-md-9">
                     <label>E3</label>
                     <select class="form-control form-control-sm" name="E3" v-model="e3">
                         <option value="encoder95">encoder95</option>
@@ -377,11 +405,23 @@
                 </div>
 
                 <div class="form-group col-md-3">
+                    <br>
+                    <input type="checkbox" id="e3" v-model="e3State" true-value="Invert" false-value="Not Invert">
+                    <label for="e3">{{e3State}}</label>
+                </div>
+
+                <div class="form-group col-md-9">
                     <label>E4</label>
                     <select class="form-control form-control-sm" name="E4" v-model="e4">
                         <option value="encoder95">encoder95</option>
                         <option value="encoder126">encoder126</option>
                     </select>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <br>
+                    <input type="checkbox" id="e4" v-model="e4State" true-value="Invert" false-value="Not Invert">
+                    <label for="e4">{{e4State}}</label>
                 </div>
 
             </div>
@@ -468,7 +508,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['no']
                                 }}
                             </button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getHTTPS()">{{
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">{{
                                 texts[lang]['yes'] }}
                             </button>
                         </div>
@@ -538,7 +578,7 @@
                 </div>
 
 
-                <button type="button" class="btn btn-success btn-md btn-block" data-toggle="modal"
+                <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal"
                         data-target="#exampleModalCenter">
                     <i class="glyphicon glyphicon-ok"></i>
                     {{ texts[lang]['save'] }}
@@ -562,7 +602,7 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
                                     texts[lang]['no'] }}
                                 </button>
-                                <button type="button" class="btn btn-success" @click="getHTTPS1()" data-dismiss="modal">
+                                <button type="button" class="btn btn-success" @click="getGA()" data-dismiss="modal">
                                     {{ texts[lang]['yes'] }}
                                 </button>
                             </div>
