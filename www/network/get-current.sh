@@ -8,6 +8,6 @@ Content-lenght: 10
 
 EOF
 
-response=`cat current_params.txt`
+response=`cat current-params.txt`
 echo  "$response"
 

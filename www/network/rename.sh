@@ -2,5 +2,5 @@
 
 read params
 
-echo "$params" > etc/hostname/
+echo "$params" > etc/hostname
 

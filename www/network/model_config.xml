@@ -48,16 +48,16 @@
 		<volumeSensor />
 	</d3>
 	<e1>
-		<encoder95 />
+		<encoder126 invert="true" />
 	</e1>
 	<e2>
-		<encoder95 />
+		<encoder95 invert="false" />
 	</e2>
 	<e3>
-		<encoder95 />
+		<encoder126 invert="false" />
 	</e3>
 	<e4>
-		<encoder95 />
+		<encoder95 invert="true" />
 	</e4>
 	<m1>
 		<motor350 />

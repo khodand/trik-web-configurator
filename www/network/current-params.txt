@@ -1,0 +1,2 @@
+angularServomotor angularServomotor angularServomotor angularServomotor angularServomotor manipulatorServomotor sharpGP2Sensor sharpGP2Sensor touchSensor touchSensor lightSensor lightSensor sonarSensor sonarSensor volumeSensor encoder126 true encoder95 false encoder126 false encoder95 true motor350 motor350 motor350 motor350 lineSensor photo
+ON 50 2G ON 95 2000 

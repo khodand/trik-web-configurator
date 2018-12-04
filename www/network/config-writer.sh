@@ -24,14 +24,21 @@ do
 	port=${i%=*}
 	device=${i#*=}
 
-	ports_config=$ports_config" "$device
-	
 	echo "	<$port>" >> $model_config
-	echo "		<$device />" >> $model_config
+
+	if [ $port = "E1" ] || [ $port = "E2" ] || [ $port = "E3" ] || [ $port = "E4" ]
+	then
+		encoder=${device%\?*}
+		invert=${device#*\?}
+		ports_config=$ports_config" "$encoder" "$invert
+		echo "		<$encoder invert=\"$invert\" />" >> $model_config 
+	else
+		ports_config=$ports_config" "$device
+		echo "		<$device />" >> $model_config
+	fi
+
 	echo "	</$port>" >> $model_config
 done
-
-#echo "$ports_config" > test.txt
 
 sed -i "1c${ports_config}" $current_params
 cat >> $model_config << EOF
@@ -54,5 +61,7 @@ cat >> $model_config << EOF
 	-->
 </config>
 EOF
+
+exec update-config.sh
 
 echo "HTTP/1.1 201 Modified"

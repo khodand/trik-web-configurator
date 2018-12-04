@@ -80,11 +80,11 @@
             accelFreq: "50",
             accelRange: "2G",
             wifiName: "",
-            e1State: "Invert",  //
-            e2State: "Invert",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
-            e3State: "Invert",  //
-            e4State: "Invert",  //
-            scriptPath: "/cgi-bin/",
+            e1State: "true",  //
+            e2State: "true",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
+            e3State: "true",  //
+            e4State: "true",  //
+            scriptPath: "/network/",
         },
         created: function () {
             var xhr = new XMLHttpRequest();
@@ -100,31 +100,35 @@
 		ports = text[0].split(' ');
 		ag = text[1].split(' ');
             }
-            this.s1 = x[0];
-            this.s2 = x[1];
-            this.s3 = x[2];
-            this.s4 = x[3];
-            this.s5 = x[4];
-            this.s6 = x[5];
-            this.a1 = x[6];
-            this.a2 = x[7];
-            this.a3 = x[8];
-            this.a4 = x[9];
-            this.a5 = x[10];
-            this.a6 = x[11];
-            this.d1 = x[12];
-            this.d2 = x[13];
-            this.d3 = x[14];
-            this.e1 = x[15];
-            this.e2 = x[16];
-            this.e3 = x[17];
-            this.e4 = x[18];
-            this.m1 = x[19];
-            this.m2 = x[20];
-            this.m3 = x[21];
-            this.m4 = x[22];
-            this.video1 = x[23];
-            this.video2 = x[24];
+            this.s1 = ports[0];
+            this.s2 = ports[1];
+            this.s3 = ports[2];
+            this.s4 = ports[3];
+            this.s5 = ports[4];
+            this.s6 = ports[5];
+            this.a1 = ports[6];
+            this.a2 = ports[7];
+            this.a3 = ports[8];
+            this.a4 = ports[9];
+            this.a5 = ports[10];
+            this.a6 = ports[11];
+            this.d1 = ports[12];
+            this.d2 = ports[13];
+            this.d3 = ports[14];
+            this.e1 = ports[15];
+	    this.e1State = ports[16];
+            this.e2 = ports[17];
+		this.e2State = ports[18];
+            this.e3 = ports[19];
+		this.e3State = ports[20];
+            this.e4 = ports[21];
+		this.e4State = ports[22];
+            this.m1 = ports[23];
+            this.m2 = ports[24];
+            this.m3 = ports[25];
+            this.m4 = ports[26];
+            this.video1 = ports[27];
+            this.video2 = ports[28];
 	    this.gyroscope = ag[3];
             this.accelerometer = ag[0];
             this.gyroFreq = ag[4];
@@ -146,8 +150,8 @@
 		var xhr = new XMLHttpRequest();
                 xhr.open("POST", this.scriptPath + "config-writer.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
-		
-		params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`		
+
+		params = `S1=${this.s1}&S2=${this.s2}&S3=${this.s3}&S4=${this.s4}&S5=${this.s5}&S6=${this.s6}&A1=${this.a1}&A2=${this.a2}&A3=${this.a3}&A4=${this.a4}&A5=${this.a5}&A6=${this.a6}&D1=${this.d1}&D2=${this.d2}&D3=${this.d3}&E1=${this.e1}?${this.e1State}&E2=${this.e2}?${this.e2State}&E3=${this.e3}?${this.e3State}&E4=${this.e4}?${this.e4State}&M1=${this.m1}&M2=${this.m2}&M3=${this.m3}&M4=${this.m4}&video1=${this.video1}&video2=${this.video2}`	
 
                 xhr.send(params);
             },
@@ -196,7 +200,10 @@
                 this.accelRange = "2G";
             },
             editWIFIName() {
-                window.location.href = `https://google.com/gyroscope=${this.wifiName}`
+		var xhr = new XMLHttpRequest();
+                xhr.open("POST", this.scriptPath + "rename.sh");
+                xhr.setRequestHeader('Content-Type', 'text-plain');
+                xhr.send(`${this.wifiName}`);
             }
 
         }
