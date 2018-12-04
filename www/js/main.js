@@ -84,10 +84,11 @@
             e2State: "Invert",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
             e3State: "Invert",  //
             e4State: "Invert",  //
+            scriptPath: "/network/",
         },
         created: function () {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/cgi-bin/get_current.sh", false);
+            xhr.open("GET", this.scriptPath + "get_current.sh", false);
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send();
             var x = "asdas";
@@ -126,31 +127,22 @@
 
         },
         methods: {
-            getPorts() {
+            httpPostRequest(path, params) {
                 var xhr = new XMLHttpRequest();
-                xhr.open("post", "/cgi-bin/config-writer.sh");
+                xhr.open("POST", path);
                 xhr.setRequestHeader('Content-Type', 'text-plain');
 
-                var params = `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`
-
                 xhr.send(params);
+            },
+            getPorts() {
+                httpPostRequest(this.scriptPath + "config-writer.sh", `s1=${this.s1}&s2=${this.s2}&s3=${this.s3}&s4=${this.s4}&s5=${this.s5}&s6=${this.s6}&a1=${this.a1}&a2=${this.a2}&a3=${this.a3}&a4=${this.a4}&a5=${this.a5}&a6=${this.a6}&d1=${this.d1}&d2=${this.d2}&d3=${this.d3}&e1=${this.e1}&e2=${this.e2}&e3=${this.e3}&e4=${this.e4}&m1=${this.m1}&m2=${this.m2}&m3=${this.m3}&m4=${this.m4}&video1=${this.video1}&video2=${this.video2}`);
             },
             changeLang(lang) {
                 this.lang = lang;
             },
             getGA() {
-                var gyro_xhr = new XMLHttpRequest();
-                gyro_xhr.open("post", "/cgi-bin/gyromod.sh");
-                gyro_xhr.setRequestHeader('Content-Type', 'text-plain');
-
-                gyro_xhr.send(`${this.gyroscope}`);
-
-
-                var acc_xhr = new XMLHttpRequest();
-                acc_xhr.open("post", "/cgi-bin/accelermod.sh");
-                acc_xhr.setRequestHeader('Content-Type', 'text-plain');
-
-                acc_xhr.send(`${this.accelerometer}`);
+                httpPostRequest(this.scriptPath + "gyromod.sh", `${this.gyroscope}`);
+                httpPostRequest(this.scriptPath + "accelermod.sh", `${this.accelerometer}`);
             },
             defaultPorts() {
                 this.s1 = "angularServomotor";
