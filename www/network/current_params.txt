@@ -1,1 +1,3 @@
-angularServomotor angularServomotor angularServomotor angularServomotor angularServomotor manipulatorServomotor sharpGP2Sensor sharpGP2Sensor touchSensor touchSensor lightSensor lightSensor sonarSensor sonarSensor volumeSensor encoder95 encoder95 encoder95 encoder95 motor350 motor350 motor350 motor350 lineSensor photo 
+angularServomotor quadroMotor manipulatorServomotor manipulatorServomotor angularServomotor manipulatorServomotor sharpGP2Sensor sharpGP2Sensor touchSensor touchSensor lightSensor lightSensor sonarSensor sonarSensor volumeSensor encoder95 encoder95 encoder95 encoder95 motor350 motor350 motor350 motor350 lineSensor photo
+ON 50 2G ON 95 2000
+6 - encoders CONF 

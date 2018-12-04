@@ -7,27 +7,34 @@ set $params
 
 Args="$*"
 
-cat > model_config.xml << EOF
+model_config=model_config.xml
+current_params=current_params.txt
+
+cat > $model_config << EOF
 <config>
 	<initScript>
 	</initScript>
 
 EOF
 
-$(echo -n > current_params.txt)
+ports_config=""
 
 for i in $Args
 do
 	port=${i%=*}
 	device=${i#*=}
-	$(echo -n "$device "  >> current_params.txt)
+
+	ports_config=$ports_config" "$device
 	
-	$(echo "	<$port>" >> model_config.xml)
-	$(echo "		<$device />" >> model_config.xml)
-	$(echo "	</$port>" >> model_config.xml)
+	echo "	<$port>" >> $model_config
+	echo "		<$device />" >> $model_config
+	echo "	</$port>" >> $model_config
 done
 
-cat >> model_config.xml << EOF
+#echo "$ports_config" > test.txt
+
+sed -i "1c${ports_config}" $current_params
+cat >> $model_config << EOF
 
 <!-- On-board sensors. -->
 	<!-- If model is not using those, they can be turned off to save system resources, by deleting them or
@@ -48,4 +55,4 @@ cat >> model_config.xml << EOF
 </config>
 EOF
 
-echo "HTTP/1.1 200 Modified"
+echo "HTTP/1.1 201 Modified"
