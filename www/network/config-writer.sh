@@ -7,8 +7,8 @@ set $params
 
 Args="$*"
 
-model_config=model_config.xml
-current_params=current_params.txt
+model_config=model-config.xml
+current_params=current-params.txt
 
 cat > $model_config << EOF
 <config>
