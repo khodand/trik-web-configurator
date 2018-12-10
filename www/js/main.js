@@ -22,7 +22,12 @@ const app = new Vue({
                 'range': 'Диапазон',
                 'cancel': 'Отменить',
                 'changeNameWifi': 'Поменять имя Wifi',
-                'state': 'Состояние'
+                'state': 'Состояние',
+                'servoMotors': 'Сервомоторы',
+                'powerMotors': 'Силовые моторы',
+                'encoders': 'Энкодеры',
+                'rangeSensors': 'Датчик дистанции',
+                'analogSensors': 'Аналоговые сенсоры'
             },
             'en': {
                 'configurator': 'Сonfigurator',
@@ -44,7 +49,12 @@ const app = new Vue({
                 'range': 'Range',
                 'cancel': 'Cancel',
                 'changeNameWifi': 'Edit wifi name',
-                'state': 'State'
+                'state': 'State',
+                'servoMotors': 'Servomotors',
+                'powerMotors': 'Power motors',
+                'encoders': 'Encoders',
+                'rangeSensors': 'Range sensors',
+                'analogSensors': 'AnalogSensor'
             }
         },
         lang: 'en',
