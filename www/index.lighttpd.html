@@ -43,6 +43,7 @@
         .nav-pills .show > .nav-link {
             color: #fff;
             background-color: #009933;
+            outline: none;
         }
 
         .layer2 {
@@ -178,7 +179,7 @@
             </button>
             <!--ServoMotor-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                <a class="navbar-brand" href="#">ServoMotor</a>
+                <a class="navbar-brand" href="#">{{ texts[lang]['servoMotors'] }}</a>
             </nav>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -247,7 +248,7 @@
 
             <!--PowerMotor-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">PowerMotor</a>
+                <a class="navbar-brand" href="#">{{ texts[lang]['powerMotors'] }}</a>
             </nav>
             <div class="row">
                 <div class="form-group col-md-3">
@@ -286,7 +287,7 @@
 
             <!--analogSensor-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">AnalogSensor</a>
+                <a class="navbar-brand" href="#">{{ texts[lang]['analogSensors'] }}</a>
             </nav>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -352,7 +353,7 @@
 
             <!--encoder-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Encoder</a>
+                <a class="navbar-brand" href="#">{{ texts[lang]['encoders'] }}</a>
             </nav>
             <div class="row">
                 <div class="form-group col-md-9">
@@ -434,7 +435,7 @@
 
             <!--RangeSensor-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">RangeSensor</a>
+                <a class="navbar-brand" href="#">{{ texts[lang]['rangeSensors'] }}</a>
             </nav>
             <div class="row">
                 <div class="form-group col-md-6">
@@ -448,19 +449,6 @@
                     <label>D2</label>
                     <select class="form-control form-control-sm" name="D2" v-model="d2">
                         <option value="sonarSensor">sonarSensor</option>
-                    </select>
-                </div>
-            </div>
-
-            <!--DigitalSensor-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">DigitalSensor(нужен ли?)</a>
-            </nav>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label>D3</label>
-                    <select class="form-control form-control-sm" name="D3" v-model="d3">
-                        <option value="volumeSensor">volumeSensor</option>
                     </select>
                 </div>
             </div>
