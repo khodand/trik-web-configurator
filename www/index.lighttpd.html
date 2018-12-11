@@ -174,9 +174,41 @@
         </div>
         <div class="tab-pane fade" id="port">
 
-            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultPorts">{{
+
+            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultPorts()"
+                    data-toggle="modal"
+                    data-target="#DefaultModalCenter">{{
                 texts[lang]['default'] }}
             </button>
+
+
+            <div class="modal fade" id="DefaultModalCenter" tabindex="-1" role="dialog"
+                 aria-labelledby="DefaultModalCenter"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalTitle">{{ texts[lang]['confirm'] }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {{ texts[lang]['confirmOffer'] }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['no']
+                                }}
+                            </button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">{{
+                                texts[lang]['yes'] }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <!--ServoMotor-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
                 <a class="navbar-brand" href="#">{{ texts[lang]['servoMotors'] }}</a>
@@ -478,11 +510,13 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal"
+
+            <button type="button" class=" btn btn-success btn-md btn-block fixed-bottom " data-toggle="modal"
                     data-target="#ModalCenter">
                 <i class="glyphicon glyphicon-ok"></i>
                 {{ texts[lang]['save'] }}
             </button>
+
 
             <!-- Modal -->
             <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
@@ -512,98 +546,19 @@
 
         </div>
         <div class="tab-pane fade" id="ga">
-            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultGA">{{
+
+            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultGA"
+                    data-toggle="modal"
+                    data-target="#exampleDefaultCenter">{{
                 texts[lang]['default'] }}
             </button>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                <a class="navbar-brand" href="#">{{ texts[lang]['gyroscope'] }}</a>
-            </nav>
-
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label>{{ texts[lang]['state'] }}</label>
-                    <select class="form-control form-control-sm" name="gyroscope" v-model="gyroscope">
-                        <option value="ON">ON</option>
-                        <option value="OFF">OFF</option>
-                    </select>
-                </div>
-
-                <!--<button v-if="gyroscope === 'ON'" type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>-->
-
-                <div v-if="gyroscope === 'ON'" class="form-group col-md-4">
-                    <label>{{ texts[lang]['frequency'] }}</label>
-                    <select class="form-control form-control-sm" name="gyroFreq" v-model="gyroFreq">
-                        <option value="95">95</option>
-                        <option value="190">190</option>
-                        <option value="380">380</option>
-                        <option value="760">760</option>
-                    </select>
-                </div>
-
-                <div v-if="gyroscope === 'ON'" class="form-group col-md-4">
-                    <label>{{ texts[lang]['range'] }}</label>
-                    <select class="form-control form-control-sm" name="gyroRange" v-model="gyroRange">
-                        <option value="250">250</option>
-                        <option value="500">500</option>
-                        <option value="2000">2000</option>
-                    </select>
-                </div>
-
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                <a class="navbar-brand" href="#">{{ texts[lang]['accelerometer'] }}</a>
-            </nav>
-
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label>{{ texts[lang]['state'] }}</label>
-                    <select class="form-control form-control-sm" name="accelerometer" v-model="accelerometer">
-                        <option value="ON">ON</option>
-                        <option value="OFF">OFF</option>
-                    </select>
-                </div>
-
-                <div v-if="accelerometer === 'ON'" class="form-group col-md-4">
-                    <label>{{ texts[lang]['frequency'] }}</label>
-                    <select class="form-control form-control-sm" name="accelFreq" v-model="accelFreq">
-                        <option value="800">800</option>
-                        <option value="400">400</option>
-                        <option value="200">200</option>
-                        <option value="100">100</option>
-                        <option value="50">50</option>
-                        <option value="12_5">12_5</option>
-                        <option value="6_25">6_25</option>
-                        <option value="1_56">1_56</option>
-                    </select>
-                </div>
-
-                <div v-if="accelerometer === 'ON'" class="form-group col-md-4">
-                    <label>{{ texts[lang]['range'] }}</label>
-                    <select class="form-control form-control-sm" name="accelRange" v-model="accelRange">
-                        <option value="2G">2G</option>
-                        <option value="4G">4G</option>
-                        <option value="8G">8G</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal"
-                    data-target="#exampleModalCenter">
-                <i class="glyphicon glyphicon-ok"></i>
-                {{ texts[lang]['save'] }}
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            <div class="modal fade" id="exampleDefaultCenter" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">{{ texts[lang]['confirm'] }}</h5>
+                            <h5 class="modal-title" id="exampleModalDefaultTitle">{{ texts[lang]['confirm'] }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -622,6 +577,124 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                        <a class="navbar-brand" href="#">{{ texts[lang]['gyroscope'] }}</a>
+                    </nav>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>{{ texts[lang]['state'] }}</label>
+                            <select class="form-control form-control-sm" name="gyroscope" v-model="gyroscope">
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+
+
+                        <div v-if="gyroscope === 'ON'" class="form-group col-md-12">
+                            <label>{{ texts[lang]['frequency'] }}</label>
+                            <select class="form-control form-control-sm" name="gyroFreq" v-model="gyroFreq">
+                                <option value="95">95</option>
+                                <option value="190">190</option>
+                                <option value="380">380</option>
+                                <option value="760">760</option>
+                            </select>
+                        </div>
+
+                        <div v-if="gyroscope === 'ON'" class="form-group col-md-12">
+                            <label>{{ texts[lang]['range'] }}</label>
+                            <select class="form-control form-control-sm" name="gyroRange" v-model="gyroRange">
+                                <option value="250">250</option>
+                                <option value="500">500</option>
+                                <option value="2000">2000</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group col-md-6">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                        <a class="navbar-brand" href="#">{{ texts[lang]['accelerometer'] }}</a>
+                    </nav>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>{{ texts[lang]['state'] }}</label>
+                            <select class="form-control form-control-sm" name="accelerometer" v-model="accelerometer">
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+
+
+                        <div v-if="accelerometer === 'ON'" class="form-group col-md-12">
+                            <label>{{ texts[lang]['frequency'] }}</label>
+                            <select class="form-control form-control-sm" name="accelFreq" v-model="accelFreq">
+                                <option value="800">800</option>
+                                <option value="400">400</option>
+                                <option value="200">200</option>
+                                <option value="100">100</option>
+                                <option value="50">50</option>
+                                <option value="12_5">12_5</option>
+                                <option value="6_25">6_25</option>
+                                <option value="1_56">1_56</option>
+                            </select>
+                        </div>
+
+                        <div v-if="accelerometer === 'ON'" class="form-group col-md-12">
+                            <label>{{ texts[lang]['range'] }}</label>
+                            <select class="form-control form-control-sm" name="accelRange" v-model="accelRange">
+                                <option value="2G">2G</option>
+                                <option value="4G">4G</option>
+                                <option value="8G">8G</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    {{ texts[lang]['save'] }}
+                </button>
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">{{ texts[lang]['confirm'] }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ texts[lang]['confirmOffer'] }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                    texts[lang]['no'] }}
+                                </button>
+                                <button type="button" class="btn btn-success" @click="getGA()" data-dismiss="modal">
+                                    {{ texts[lang]['yes'] }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
     </div>
 </div>
