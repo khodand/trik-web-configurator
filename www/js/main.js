@@ -26,7 +26,7 @@ const app = new Vue({
                 'servoMotors': 'Сервомоторы',
                 'powerMotors': 'Силовые моторы',
                 'encoders': 'Энкодеры',
-                'rangeSensors': 'Датчик дистанции',
+                'rangeSensors': 'Датчики дистанции',
                 'analogSensors': 'Аналоговые сенсоры'
             },
             'en': {
@@ -203,6 +203,10 @@ const app = new Vue({
             this.m4 = "motor350";
             this.video1 = "lineSensor";
             this.video2 = "photo";
+            this.e1State = "true";
+            this.e2State = "true";
+            this.e3State = "true";
+            this.e4State = "true";
         },
         defaultGA() {
             this.gyroscope = "ON";
