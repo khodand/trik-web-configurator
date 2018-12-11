@@ -2,75 +2,75 @@
 	<initScript>
 	</initScript>
 
-	<s1>
+	<S1>
 		<angularServomotor />
-	</s1>
-	<s2>
+	</S1>
+	<S2>
 		<angularServomotor />
-	</s2>
-	<s3>
+	</S2>
+	<S3>
 		<angularServomotor />
-	</s3>
-	<s4>
+	</S3>
+	<S4>
 		<angularServomotor />
-	</s4>
-	<s5>
+	</S4>
+	<S5>
 		<angularServomotor />
-	</s5>
-	<s6>
+	</S5>
+	<S6>
 		<manipulatorServomotor />
-	</s6>
-	<a1>
+	</S6>
+	<A1>
 		<sharpGP2Sensor />
-	</a1>
-	<a2>
+	</A1>
+	<A2>
 		<sharpGP2Sensor />
-	</a2>
-	<a3>
+	</A2>
+	<A3>
 		<touchSensor />
-	</a3>
-	<a4>
+	</A3>
+	<A4>
 		<touchSensor />
-	</a4>
-	<a5>
+	</A4>
+	<A5>
 		<lightSensor />
-	</a5>
-	<a6>
+	</A5>
+	<A6>
 		<lightSensor />
-	</a6>
-	<d1>
+	</A6>
+	<D1>
 		<sonarSensor />
-	</d1>
-	<d2>
+	</D1>
+	<D2>
 		<sonarSensor />
-	</d2>
-	<d3>
+	</D2>
+	<D3>
 		<volumeSensor />
-	</d3>
-	<e1>
-		<encoder126 invert="true" />
-	</e1>
-	<e2>
-		<encoder95 invert="false" />
-	</e2>
-	<e3>
-		<encoder126 invert="false" />
-	</e3>
-	<e4>
+	</D3>
+	<E1>
 		<encoder95 invert="true" />
-	</e4>
-	<m1>
+	</E1>
+	<E2>
+		<encoder95 invert="true" />
+	</E2>
+	<E3>
+		<encoder95 invert="true" />
+	</E3>
+	<E4>
+		<encoder95 invert="true" />
+	</E4>
+	<M1>
 		<motor350 />
-	</m1>
-	<m2>
+	</M1>
+	<M2>
 		<motor350 />
-	</m2>
-	<m3>
+	</M2>
+	<M3>
 		<motor350 />
-	</m3>
-	<m4>
+	</M3>
+	<M4>
 		<motor350 />
-	</m4>
+	</M4>
 	<video1>
 		<lineSensor />
 	</video1>

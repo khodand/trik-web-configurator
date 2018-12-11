@@ -94,7 +94,7 @@ const app = new Vue({
         e2State: "true",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
         e3State: "true",  //
         e4State: "true",  //
-        scriptPath: "/network/",
+        scriptPath: "/cgi-bin/",
         buttonChangeState: "false",
         buttonChangeLanguage: "",
 
@@ -173,7 +173,7 @@ const app = new Vue({
         },
         getGA() {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", this.scriptPath + "ag-config-test.sh");
+            xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.accelerometer}&${this.accelFreq}&${this.accelRange}&${this.gyroscope}&${this.gyroFreq}&${this.gyroRange}`);
         },

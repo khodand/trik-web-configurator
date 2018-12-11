@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -euxo pipefail
+
 read params
 
 IFS="${IFS}&"

@@ -1,6 +1,16 @@
 #!/bin/sh
 
+set -euxo pipefail
+
 read params
+
+if [params = "test"]
+then 
+	params=`cat test-params.txt`
+	IFS="${IFS}\n"
+	set $params
+	params=$1
+fi
 
 IFS="${IFS}&"
 set $params
@@ -62,6 +72,6 @@ cat >> $model_config << EOF
 </config>
 EOF
 
-exec update-config.sh
+cp model-config.xml /home/root/trik/
 
 echo "HTTP/1.1 201 Modified"
