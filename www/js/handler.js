@@ -1,6 +1,6 @@
 function sendNetworkData(paramString) {
     var xhr = new XMLHttpRequest();
-    xhr.open("post", "wpa-writer.sh");
+    xhr.open("post", "/cgi-bin/wpa-writer.sh");
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function() {

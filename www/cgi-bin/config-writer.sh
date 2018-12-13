@@ -1,16 +1,6 @@
 #!/bin/sh
 
-set -euxo pipefail
-
 read params
-
-if [params = "test"]
-then 
-	params=`cat test-params.txt`
-	IFS="${IFS}\n"
-	set $params
-	params=$1
-fi
 
 IFS="${IFS}&"
 set $params
@@ -18,6 +8,8 @@ set $params
 Args="$*"
 
 model_config=model-config.xml
+rm $model_config
+
 current_params=current-params.txt
 
 cat > $model_config << EOF
@@ -26,6 +18,7 @@ cat > $model_config << EOF
 	</initScript>
 
 EOF
+
 
 ports_config=""
 
@@ -50,9 +43,11 @@ do
 	echo "	</$port>" >> $model_config
 done
 
-sed -i "1c${ports_config}" $current_params
-cat >> $model_config << EOF
 
+sed -i "1c${ports_config}" $current_params
+
+
+cat >> $model_config << EOF
 <!-- On-board sensors. -->
 	<!-- If model is not using those, they can be turned off to save system resources, by deleting them or
 		 commenting them out. -->
@@ -72,6 +67,16 @@ cat >> $model_config << EOF
 </config>
 EOF
 
-cp model-config.xml /home/root/trik/
+
+if [ ! -e /etc/version ]; then
+
+  . ./allVarsForUserTest.txt
+  export $(cut -d= -f1 allVarsForUserTest.txt)
+
+  notify-send "model-config.xml" "`cat model-config.xml`"
+else
+	cp model-config.xml /home/root/trik/	
+fi
 
 echo "HTTP/1.1 201 Modified"
+

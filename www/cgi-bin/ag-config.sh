@@ -1,13 +1,21 @@
 #!/bin/sh
 
-set -euxo pipefail
-
 read params
 
 IFS="${IFS}&"
 set $params
 
 sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params.txt
+
+
+if [ ! -e /etc/version ]; then
+
+  . ./allVarsForUserTest.txt
+  export $(cut -d= -f1 allVarsForUserTest.txt)
+
+  notify-send "accelerometr and gyroscope" "${1} ${2} ${3} ${4} ${5} ${6}"
+else	
+
 
 accel_path=/sys/class/misc/mma845x/
 gyro_path=/sys/class/misc/l3g42xxd/
@@ -103,6 +111,6 @@ else
 	rmmod l3g42xxd
 fi
 
-
+fi
 
 echo "HTTP/1.1 200 Modified"

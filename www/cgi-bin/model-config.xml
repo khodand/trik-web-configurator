@@ -3,10 +3,10 @@
 	</initScript>
 
 	<S1>
-		<angularServomotor />
+		<quadroMotor />
 	</S1>
 	<S2>
-		<angularServomotor />
+		<continuousRotationServomotor />
 	</S2>
 	<S3>
 		<angularServomotor />
@@ -15,7 +15,7 @@
 		<angularServomotor />
 	</S4>
 	<S5>
-		<angularServomotor />
+		<manipulatorServomotor />
 	</S5>
 	<S6>
 		<manipulatorServomotor />
@@ -77,7 +77,6 @@
 	<video2>
 		<photo />
 	</video2>
-
 <!-- On-board sensors. -->
 	<!-- If model is not using those, they can be turned off to save system resources, by deleting them or
 		 commenting them out. -->
