@@ -27,7 +27,12 @@ const app = new Vue({
                 'powerMotors': 'Силовые моторы',
                 'encoders': 'Энкодеры',
                 'rangeSensors': 'Датчики дистанции',
-                'analogSensors': 'Аналоговые сенсоры'
+                'analogSensors': 'Аналоговые сенсоры',
+                'advancedSet' : 'Расширенные настройки',
+                'infoSet': 'Данные настройки рассчитаны для опытных пользователей.',
+                'network': 'Сеть',
+                'submit' : 'Отправить',
+                'accessPoint' : 'Точка доступа'
             },
             'en': {
                 'configurator': 'Сonfigurator',
@@ -54,7 +59,12 @@ const app = new Vue({
                 'powerMotors': 'Power motors',
                 'encoders': 'Encoders',
                 'rangeSensors': 'Range sensors',
-                'analogSensors': 'AnalogSensor'
+                'analogSensors': 'AnalogSensor',
+                'advancedSet' : 'Advanced settings',
+                'infoSet': 'These settings are designed for advanced users.',
+                'network': 'Network',
+                'submit' : 'Submit',
+                'accessPoint' : 'Access point'
             }
         },
         lang: 'en',
@@ -97,7 +107,7 @@ const app = new Vue({
         scriptPath: "/cgi-bin/",
         buttonChangeState: "false",
         buttonChangeLanguage: "",
-
+        hostName: ""
     },
     created: function () {
         var xhr = new XMLHttpRequest();
@@ -218,6 +228,7 @@ const app = new Vue({
         },
         editWIFIName() {
             var xhr = new XMLHttpRequest();
+            this.hostName = this.wifiName;
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.wifiName}`);
@@ -234,3 +245,5 @@ const app = new Vue({
 
     }
 });
+
+
