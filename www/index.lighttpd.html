@@ -66,28 +66,37 @@
         }
 
     </style>
+</head>
 
-<body>
 <script src="js/vue.min.js"></script>
 
 <div id="app">
 
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001A42">
-        <a href="#" class="navbar-left mr-3"><img src="images/logo-eng-lightgreen-purple-1000x1000.png" width="80"></a>
+
+        <a href="#home" class="navbar-left mr-3"><img src="images/logo-eng-lightgreen-purple-1000x1000.png"
+                                                      width="80"></a>
+
+
         <button class="navbar-toggler" @click="buttonSUP()" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                 style="background-color: #009933">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav nav-pills navbar-nav mr-auto">
-                <li class="nav-item">
+
+
+            <ul class="nav nav-pills navbar-nav mr-auto pull-left">
+                <!--<li class="nav-item">
                     <a class="nav-link active text-white" data-toggle="pill" href="#home">{{
                         texts[lang]['home']
-                        }}</a>
+                        }}</a>-->
                 <li class="nav-item">
-                    <a class="nav-link text-white" data-toggle="pill" href="#wifi">Wifi</a>
+                    <a class="nav-link active text-white" data-toggle="pill" href="#wifi">{{
+                        texts[lang]['network'] }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" data-toggle="pill" href="#port">{{
@@ -99,7 +108,11 @@
                         }}&{{ texts[lang]['accelerometer'] }}</a>
                 </li>
             </ul>
+
+
         </div>
+
+
         <div class="btn-group btn-group-toggle" v-if="regShowLanguage() === 'true'" role="buttons"
              aria-label="Basic example">
             <button type="button" class="btn btn-success" @click="changeLang('en')"
@@ -112,65 +125,54 @@
     </nav>
 
     <div class="tab-content main-navigation" style="padding: 20px;">
-        <div class="tab-pane fade show active active" id="home">
+        <!--<div class="tab-pane fade show active active" id="home">
             <input type="button" onclick="this.style.display='none';" value="Hide It!"/>
-        </div>
-        <div class="tab-pane fade" id="wifi">
+        </div>-->
+        <div class="tab-pane fade fade show active active" id="wifi">
 
-            <div id="success_msg" class="success">Success!</div>
-            <div id="error_msg" class="error"></div>
-            <form id="submit-form" action="javascript:void(0);">
-                <div class="form-group">
-                    <label for="essid">WiFi name</label>
-                    <input type="text" class="form-control" id="essid" aria-describedby="emailHelp" placeholder="SSID">
+
+            <div class="row">
+                <div class="form-group col-md-6">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                        <a class="navbar-brand" href="#">Wi-fi client</a>
+                    </nav>
+                    <br>
+
+                    <form id="submit-form" action="javascript:void(0);">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="essid" aria-describedby="emailHelp"
+                                   placeholder="WiFi name (SSID)">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn  btn-success" style="background-color: #009933"
+                                onclick="handle()" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover"
+                                data-content="And here's some amazing content. It's very engaging. Right?">
+                            {{ texts[lang]['submit'] }}
+                        </button>
+                    </form>
+
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn  btn-success" style="background-color: #009933" onclick="handle()">
-                    Submit
-                </button>
 
-                <button type="button" class="btn  btn-success" style="background-color: #009933" data-toggle="modal"
-                        data-target="#EditNameWifi">{{
-                    texts[lang]['changeNameWifi'] }}
-                </button>
+                <div class="form-group col-md-6">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                        <a class="navbar-brand" href="#">{{ texts[lang]['accessPoint'] }}</a>
+                    </nav>
+                    <br>
+                    <div class="input-group mb-3">
+                        <input type="text" v-model="wifiName" class="form-control" placeholder="New hostname"
+                               aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn  btn-success" type="button" @click="editWIFIName()">{{
+                                texts[lang]['save'] }}
+                            </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="EditNameWifi" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleEditNameWifi" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleEditNameWifi">{{ texts[lang]['changeNameWifi']
-                                    }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="input-group mb-3">
-                                    <input v-model="wifiName" type="text" class="form-control"
-                                           aria-label="Sizing example input"
-                                           aria-describedby="inputGroup-sizing-default">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
-                                    texts[lang]['cancel'] }}
-                                </button>
-                                <button type="button" class="btn  btn-success" data-dismiss="modal"
-                                        @click="editWIFIName()">{{
-                                    texts[lang]['save'] }}
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
-
+            </div>
         </div>
         <div class="tab-pane fade" id="port">
 
@@ -197,10 +199,12 @@
                             {{ texts[lang]['confirmOffer'] }}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['no']
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                texts[lang]['no']
                                 }}
                             </button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">{{
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">
+                                {{
                                 texts[lang]['yes'] }}
                             </button>
                         </div>
@@ -533,10 +537,12 @@
                             {{ texts[lang]['confirmOffer'] }}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ texts[lang]['no']
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                texts[lang]['no']
                                 }}
                             </button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">{{
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">
+                                {{
                                 texts[lang]['yes'] }}
                             </button>
                         </div>
@@ -581,8 +587,14 @@
             <div class="row">
                 <div class="form-group col-md-6">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light " style="margin-top: 10px">
                         <a class="navbar-brand" href="#">{{ texts[lang]['gyroscope'] }}</a>
+                        <form class="form-inline my-2 my-lg-0">
+                            <button type="button" class="btn btn-outline-light"
+                                    role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover"
+                                    data-content="And here's some amazing content. It's very engaging. Right?"><img src="images/baseline_help_outline_black_18dp.png">
+                            </button>
+                        </form>
                     </nav>
 
                     <div class="row">
@@ -594,16 +606,15 @@
                             </select>
                         </div>
 
-                        <a class="btn btn-secondary form-group col-md-6" style="margin-left: 15px" v-if="gyroscope === 'ON'" data-toggle="collapse"
+                        <a class="btn btn-secondary form-group col-md-6" style="margin-left: 15px"
+                           v-if="gyroscope === 'ON'" data-toggle="collapse"
                            href="#gDopSet" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Advanced settings {{ texts[lang]['gyroscope'] }}
+                            {{ texts[lang]['advancedSet'] }}
                         </a>
 
                         <div class="collapse form-group" v-if="gyroscope === 'ON'" id="gDopSet">
-                            <div class="card card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                sapiente ea proident.
+                            <div class="card card-body" style="margin-left: 15px">
+                                {{ texts[lang]['infoSet'] }}
                                 <br>
                                 <br>
 
@@ -634,27 +645,33 @@
 
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
                         <a class="navbar-brand" href="#">{{ texts[lang]['accelerometer'] }}</a>
+                        <form class="form-inline my-2 my-lg-0">
+                            <button type="button" class="btn btn-outline-light"
+                                    role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover"
+                                    data-content="And here's some amazing content. It's very engaging. Right?"><img src="images/baseline_help_outline_black_18dp.png">
+                            </button>
+                        </form>
                     </nav>
 
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label>{{ texts[lang]['state'] }}</label>
-                            <select class="form-control form-control-sm" name="accelerometer" v-model="accelerometer">
+                            <select class="form-control form-control-sm" name="accelerometer"
+                                    v-model="accelerometer">
                                 <option value="ON">ON</option>
                                 <option value="OFF">OFF</option>
                             </select>
                         </div>
 
-                        <a class="btn btn-secondary form-group col-md-6" style="margin-left: 15px" v-if="accelerometer === 'ON'" data-toggle="collapse"
+                        <a class="btn btn-secondary form-group col-md-6" style="margin-left: 15px"
+                           v-if="accelerometer === 'ON'" data-toggle="collapse"
                            href="#aDopSet" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Advanced settings {{ texts[lang]['accelerometer'] }}
+                            {{ texts[lang]['advancedSet'] }}
                         </a>
 
-                        <div class="collapse form-group" v-if="accelerometer === 'ON'"  id="aDopSet">
-                            <div class="card card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                                sapiente ea proident.
+                        <div class="collapse form-group" v-if="accelerometer === 'ON'" id="aDopSet">
+                            <div class="card card-body" style="margin-left: 15px">
+                                {{ texts[lang]['infoSet'] }}
                                 <br>
                                 <br>
 
@@ -724,9 +741,22 @@
         </div>
     </div>
 </div>
+<script src="js/popper.min.js"></script>
 <script src="js/jQueryCompressed.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/handler.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+<script>
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+</script>
+
 </body>
 </html>
