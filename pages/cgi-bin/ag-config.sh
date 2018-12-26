@@ -5,7 +5,7 @@ read params
 IFS="${IFS}&"
 set $params
 
-sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params
+sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params.txt
 
 exec /notify.sh "Gyro and Acc"
 

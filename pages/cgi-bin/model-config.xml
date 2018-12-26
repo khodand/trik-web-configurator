@@ -6,16 +6,16 @@
 		<quadroMotor />
 	</S1>
 	<S2>
-		<quadroMotor />
+		<continuousRotationServomotor />
 	</S2>
 	<S3>
 		<angularServomotor />
 	</S3>
 	<S4>
-		<quadroEsc />
+		<angularServomotor />
 	</S4>
 	<S5>
-		<angularServomotor />
+		<manipulatorServomotor />
 	</S5>
 	<S6>
 		<manipulatorServomotor />

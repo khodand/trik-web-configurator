@@ -2,8 +2,8 @@
 
 if [ ! -e /etc/version ]; then
 
-  . ./allVarsForUserTest
-  export $(cut -d= -f1 allVarsForUserTest)
+  . ./allVarsForUserTest.txt
+  export $(cut -d= -f1 allVarsForUserTest.txt)
 
   read params
   

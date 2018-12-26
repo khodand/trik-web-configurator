@@ -1,22 +1,19 @@
 #!/bin/sh
 
-
 read params
 
 IFS="${IFS}&"
 set $params
 
-
 . ./notify.sh
-myNotify 
-
+myNotify "acc and ggee"
 
 Args="$*"
 
 model_config=model-config.xml
 rm $model_config
 
-current_params=current-params
+current_params=current-params.txt
 
 cat > $model_config << EOF
 <config>
@@ -75,8 +72,8 @@ EOF
 
 if [ ! -e /etc/version ]; then
 
-  . ./allVarsForUserTest
-  export $(cut -d= -f1 allVarsForUserTest)
+  . ./allVarsForUserTest.txt
+  export $(cut -d= -f1 allVarsForUserTest.txt)
 
   notify-send "model-config.xml" "`cat model-config.xml`"
 else
