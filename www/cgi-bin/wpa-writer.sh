@@ -1,14 +1,8 @@
 #!/bin/sh
 
-if [ ! -e /etc/version ]; then
+. ./notify.sh
+myNotify 
 
-  . ./allVarsForUserTest
-  export $(cut -d= -f1 allVarsForUserTest)
-
-  read params
-  
-  notify-send "New Network added" "${params}"
-else	
 	if [ "$REQUEST_METHOD" = "POST" ]; then
 	    read params
 
@@ -54,4 +48,3 @@ else
 		fi
 	    fi
 	fi
-fi

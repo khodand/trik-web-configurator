@@ -1,15 +1,12 @@
 #!/bin/sh
 
-
 read params
 
 IFS="${IFS}&"
 set $params
 
-
 . ./notify.sh
 myNotify 
-
 
 Args="$*"
 
@@ -72,17 +69,6 @@ cat >> $model_config << EOF
 	-->
 </config>
 EOF
-
-if [ ! -e /etc/version ]; then
-
-  . ./allVarsForUserTest
-  export $(cut -d= -f1 allVarsForUserTest)
-
-  notify-send "model-config.xml" "`cat model-config.xml`"
-else
-	cp model-config.xml /home/root/trik/	
-fi
-
 
 echo "HTTP/1.1 201 Modified"
 

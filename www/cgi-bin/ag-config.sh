@@ -7,7 +7,8 @@ set $params
 
 sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params
 
-exec /notify.sh "Gyro and Acc"
+. ./notify.sh
+myNotify 
 
 accel_path=/sys/class/misc/mma845x/
 gyro_path=/sys/class/misc/l3g42xxd/
