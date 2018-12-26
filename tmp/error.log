@@ -1,0 +1,22 @@
+2018-12-13 16:53:06: (log.c.217) server started 
+2018-12-13 17:08:55: (server.c.1828) server stopped by UID = 1000 PID = 20060 
+2018-12-13 17:09:02: (log.c.217) server started 
+2018-12-13 17:11:16: (server.c.1751) [note] graceful shutdown started 
+2018-12-13 17:11:16: (server.c.1828) server stopped by UID = 0 PID = 0 
+2018-12-13 17:11:31: (log.c.217) server started 
+2018-12-13 17:11:51: (server.c.1828) server stopped by UID = 1000 PID = 20103 
+2018-12-13 17:11:52: (log.c.217) server started 
+2018-12-21 13:14:12: (mod_cgi.c.695) cgi died, pid: 21945 
+2018-12-21 13:16:32: (mod_cgi.c.695) cgi died, pid: 21964 
+2018-12-21 13:34:36: (mod_cgi.c.695) cgi died, pid: 22088 
+2018-12-21 13:35:12: (mod_cgi.c.695) cgi died, pid: 22105 
+2018-12-21 13:36:08: (mod_cgi.c.695) cgi died, pid: 22132 
+2018-12-26 08:25:03: (mod_cgi.c.695) cgi died, pid: 17939 
+2018-12-26 08:31:24: (mod_cgi.c.695) cgi died, pid: 17984 
+2018-12-26 08:35:07: (mod_cgi.c.695) cgi died, pid: 18008 
+2018-12-26 08:40:00: (mod_cgi.c.695) cgi died, pid: 18032 
+2018-12-26 08:43:16: (mod_cgi.c.695) cgi died, pid: 18046 
+2018-12-26 08:47:37: (mod_cgi.c.695) cgi died, pid: 18063 
+2018-12-26 08:48:06: (mod_cgi.c.695) cgi died, pid: 18072 
+2018-12-26 08:50:14: (mod_cgi.c.695) cgi died, pid: 18107 
+2018-12-26 08:53:32: (mod_cgi.c.695) cgi died, pid: 18172 

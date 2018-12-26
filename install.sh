@@ -4,4 +4,4 @@
 mkdir tmp
 
 # Export env variables to be able to run notify-send
-env > www/cgi-bin/allVarsForUserTest.txt
+env > www/cgi-bin/allVarsForUserTest

@@ -1,8 +1,10 @@
 #!/bin/sh
 
-set -euxo pipefail
 
 read params
+
+. ./notify.sh
+myNotify 
 
 echo "$params" > /etc/hostname
 
