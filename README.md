@@ -10,7 +10,7 @@
 ```sh
 $ lighttpd -f lighttpd.conf
 ```
-Откройте в браузере страницу  http://127.0.0.1/index.lighttpd.html
+Откройте в браузере страницу  http://127.0.0.1:8080/index.lighttpd.html
 
 ### Todos
 - Удалить лишние файлы
