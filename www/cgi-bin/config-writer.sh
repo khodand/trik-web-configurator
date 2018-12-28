@@ -70,5 +70,7 @@ cat >> $model_config << EOF
 </config>
 EOF
 
+cp $model_config /home/root/trik/ 
+
 echo "HTTP/1.1 201 Modified"
 

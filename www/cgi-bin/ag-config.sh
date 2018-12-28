@@ -10,11 +10,13 @@ sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params
 . ./notify.sh
 myNotify 
 
+system_config=/home/root/trik/system-config.xml #путь к файлу может быть не верным 
 accel_path=/sys/class/misc/mma845x/
 gyro_path=/sys/class/misc/l3g42xxd/
 
 if [[ $1 = "ON" ]]
 then
+	#добавить секцию инит в систем конфиг
 	modprobe mma845x
 	case $2 in 
 		800)
@@ -59,6 +61,7 @@ then
 			;;
 	esac
 else
+	#удлаить секцию инит в сисетм конфиг если такая есть
 	rmmod mma845x
 fi
 
@@ -66,6 +69,7 @@ fi
 
 if [[ $4 = "ON" ]]
 then
+	#добавить секцию инит в систем конфиг
 	modprobe l3g42xxd
 	modprobe l3g42xxd_spi
 
@@ -100,6 +104,7 @@ then
 			;;
 	esac
 else
+	#удлаить секцию инит в сисетм конфиг если такая есть
 	rmmod l3g42xxd_spi
 	rmmod l3g42xxd
 fi
