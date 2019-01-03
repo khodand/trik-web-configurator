@@ -2,46 +2,50 @@
 
 read params
 
-IFS="${IFS}&"
 set $params
 
+system_config=/home/root/trik/system-config.xml #путь к файлу может быть не верным
+accel_path=/sys/class/misc/mma845x/
+gyro_path=/sys/class/misc/l3g42xxd/
+
+
 sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params
+sed -i 's!^\./ag-config\.sh.*$!./ag-config.sh ${1} ${2} ${3} ${4} ${5} ${6}!' $system_config
+
 
 . ./notify.sh
 myNotify 
 
-system_config=/home/root/trik/system-config.xml #путь к файлу может быть не верным 
-accel_path=/sys/class/misc/mma845x/
-gyro_path=/sys/class/misc/l3g42xxd/
 
 if [[ $1 = "ON" ]]
 then
-	#добавить секцию инит в систем конфиг
 	modprobe mma845x
+	frequency=0
+	range=0
 	case $2 in 
 		800)
-			echo 0 > ${accel_path}odr_selection
+			frequency=0
 			;;
 		400)
-			echo 1 > ${accel_path}odr_selection
+			frequency=1
 			;;
 		200)
-			echo 2 > ${accel_path}odr_selection
+			frequency=2
 			;;
 		100)
-			echo 3 > ${accel_path}odr_selection
+			frequency=3
 			;;
 		50)
-			echo 4 > ${accel_path}odr_selection
+			frequency=4
 			;;
 		12_5)
-			echo 5 > ${accel_path}odr_selection
+			frequency=5
 			;;
 		6_25)
-			echo 6 > ${accel_path}odr_selection
+			frequency=6
 			;;
 		1_56)
-			echo 7 > ${accel_path}odr_selection
+			frequency=7
 			;;
 		*)
 			;;
@@ -49,19 +53,21 @@ then
 
 	case $3 in 
 		2G)
-			echo 0 > ${accel_path}fs_selection
+			range=0
 			;;
 		4G)
-			echo 1 > ${accel_path}fs_selection
+			range=1
 			;;
 		8G)
-			echo 2 > ${accel_path}fs_selection
+			range=2
 			;;
 		*)
 			;;
 	esac
+
+	echo $frequency > ${accel_path}odr_selection
+	echo $range > ${accel_path}fs_selection
 else
-	#удлаить секцию инит в сисетм конфиг если такая есть
 	rmmod mma845x
 fi
 
@@ -69,22 +75,22 @@ fi
 
 if [[ $4 = "ON" ]]
 then
-	#добавить секцию инит в систем конфиг
 	modprobe l3g42xxd
 	modprobe l3g42xxd_spi
-
+	frequency=0
+	range=0
 	case $5 in 
 		95)
-			echo 0 > ${gyro_path}odr_selection
+			frequency=0
 			;;
 		190)
-			echo 1 > ${gyro_path}odr_selection
+			frequency=1
 			;;
 		380)
-			echo 2 > ${gyro_path}odr_selection
+			frequency=2
 			;;
 		760)	
-			echo 3 > ${gyro_path}odr_selection
+			frequency=3
 			;;
 		*)
 			;;
@@ -92,19 +98,21 @@ then
 
 	case $6 in 
 		250)
-			echo 0 > ${gyro_path}fs_selection
+			range=0
 			;;
 		500)
-			echo 1 > ${gyro_path}fs_selection
+			range=1
 			;;
 		2000)
-			echo 2 > ${gyro_path}fs_selection
+			range=2
 			;;
 		*)
 			;;
 	esac
+
+	echo $frequency > ${gyro_path}odr_selection
+	echo $range > ${gyro_path}fs_selection
 else
-	#удлаить секцию инит в сисетм конфиг если такая есть
 	rmmod l3g42xxd_spi
 	rmmod l3g42xxd
 fi
