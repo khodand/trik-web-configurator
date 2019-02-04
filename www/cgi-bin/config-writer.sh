@@ -1,11 +1,12 @@
 #!/bin/sh
 
+process_name="config-writer"
+. ./notify.sh 
+notifyThenKill 
+
 read params
 
 set $params
-
-. ./notify.sh
-notifyThenKill 
 
 Args="$*"
 

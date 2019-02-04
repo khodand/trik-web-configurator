@@ -1,10 +1,10 @@
 #!/bin/sh
 
+process_name="rename"
+. ./notify.sh
+notifyThenKill
 
 read params
-
-. ./notify.sh
-myNotify 
 
 echo "$params" > /etc/hostname
 

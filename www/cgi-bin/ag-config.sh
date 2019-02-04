@@ -1,5 +1,9 @@
 #!/bin/sh
 
+process_name="ag-config"
+. ./notify.sh
+notifyThenKill 
+
 read params
 
 set $params
@@ -11,10 +15,6 @@ gyro_path=/sys/class/misc/l3g42xxd/
 
 sed -i "2c${1} ${2} ${3} ${4} ${5} ${6}" current-params
 sed -i 's!^\./ag-config\.sh.*$!./ag-config.sh ${1} ${2} ${3} ${4} ${5} ${6}!' $system_config
-
-
-. ./notify.sh
-notifyThenKill 
 
 
 if [[ $1 = "ON" ]]

@@ -1,7 +1,8 @@
 #!/bin/sh
 
+process_name="wpa-writer"
 . ./notify.sh
-notifyThenKill 
+notifyThenKill
 
 	if [ "$REQUEST_METHOD" = "POST" ]; then
 	    read params
