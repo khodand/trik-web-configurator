@@ -1,7 +1,7 @@
 #!/bin/sh
 
 . ./notify.sh
-myNotify 
+notifyThenKill 
 
 	if [ "$REQUEST_METHOD" = "POST" ]; then
 	    read params

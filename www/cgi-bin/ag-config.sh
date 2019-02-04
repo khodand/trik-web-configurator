@@ -14,7 +14,7 @@ sed -i 's!^\./ag-config\.sh.*$!./ag-config.sh ${1} ${2} ${3} ${4} ${5} ${6}!' $s
 
 
 . ./notify.sh
-myNotify 
+notifyThenKill 
 
 
 if [[ $1 = "ON" ]]

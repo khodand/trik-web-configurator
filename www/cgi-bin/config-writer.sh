@@ -6,7 +6,7 @@ IFS="${IFS}&"
 set $params
 
 . ./notify.sh
-myNotify 
+notifyThenKill 
 
 Args="$*"
 
