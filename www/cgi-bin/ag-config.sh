@@ -20,36 +20,35 @@ notifyThenKill
 if [[ $1 = "ON" ]]
 then
 	modprobe mma845x
-	local_frequency=0
-	local_range=0
+	local frequency=0
+	local range=0
 	case $2 in 
-		800)
-			local_frequency=0
+		800) frequency=0
 			;;
-		400) local_frequency=1
+		400) frequency=1
 			;;
-		200) local_frequency=2
+		200) frequency=2
 			;;
-		100) local_frequency=3
+		100) frequency=3
 			;;
-		50) local_frequency=4
+		50) frequency=4
 			;;
-		12_5) local_frequency=5
+		12_5) frequency=5
 			;;
-		6_25) local_frequency=6
+		6_25) frequency=6
 			;;
-		1_56) local_frequency=7
+		1_56) frequency=7
 			;;
 		*)
 			;;
 	esac
 
 	case $3 in 
-		2G)	local_range=0
+		2G)	range=0
 			;;
-		4G)	local_range=1
+		4G)	range=1
 			;;
-		8G)	local_range=2
+		8G)	range=2
 			;;
 		*)
 			;;
@@ -67,27 +66,27 @@ if [[ $4 = "ON" ]]
 then
 	modprobe l3g42xxd
 	modprobe l3g42xxd_spi
-	frequency=0
-	range=0
+	local frequency=0
+	local range=0
 	case $5 in 
-		95) local_frequency=0
+		95) frequency=0
 			;;
-		190) local_frequency=1
+		190) frequency=1
 			;;
-		380) local_frequency=2
+		380) frequency=2
 			;;
-		760) local_frequency=3
+		760) frequency=3
 			;;
 		*)
 			;;
 	esac
 
 	case $6 in 
-		250)	local_range=0
+		250)	range=0
 			;;
-		500)	local_range=1
+		500)	range=1
 			;;
-		2000)	local_range=2
+		2000)	range=2
 			;;
 		*)
 			;;
