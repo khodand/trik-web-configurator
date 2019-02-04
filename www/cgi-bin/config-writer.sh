@@ -1,8 +1,10 @@
 #!/bin/sh
 
+set -euox pipefail 
+
 process_name="config-writer"
-. ./notify.sh 
-notifyThenKill 
+. ./notify.sh  
+notifyThenKill  
 
 read params
 
