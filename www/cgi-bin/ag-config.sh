@@ -4,7 +4,7 @@ read params
 
 set $params
 
-system_config=/home/root/trik/system-config.xml #путь к файлу может быть не верным
+system_config=/home/root/trik/system-config.xml
 accel_path=/sys/class/misc/mma845x/
 gyro_path=/sys/class/misc/l3g42xxd/
 
@@ -20,46 +20,36 @@ myNotify
 if [[ $1 = "ON" ]]
 then
 	modprobe mma845x
-	frequency=0
-	range=0
+	local_frequency=0
+	local_range=0
 	case $2 in 
 		800)
-			frequency=0
+			local_frequency=0
 			;;
-		400)
-			frequency=1
+		400) local_frequency=1
 			;;
-		200)
-			frequency=2
+		200) local_frequency=2
 			;;
-		100)
-			frequency=3
+		100) local_frequency=3
 			;;
-		50)
-			frequency=4
+		50) local_frequency=4
 			;;
-		12_5)
-			frequency=5
+		12_5) local_frequency=5
 			;;
-		6_25)
-			frequency=6
+		6_25) local_frequency=6
 			;;
-		1_56)
-			frequency=7
+		1_56) local_frequency=7
 			;;
 		*)
 			;;
 	esac
 
 	case $3 in 
-		2G)
-			range=0
+		2G)	local_range=0
 			;;
-		4G)
-			range=1
+		4G)	local_range=1
 			;;
-		8G)
-			range=2
+		8G)	local_range=2
 			;;
 		*)
 			;;
@@ -80,31 +70,24 @@ then
 	frequency=0
 	range=0
 	case $5 in 
-		95)
-			frequency=0
+		95) local_frequency=0
 			;;
-		190)
-			frequency=1
+		190) local_frequency=1
 			;;
-		380)
-			frequency=2
+		380) local_frequency=2
 			;;
-		760)	
-			frequency=3
+		760) local_frequency=3
 			;;
 		*)
 			;;
 	esac
 
 	case $6 in 
-		250)
-			range=0
+		250)	local_range=0
 			;;
-		500)
-			range=1
+		500)	local_range=1
 			;;
-		2000)
-			range=2
+		2000)	local_range=2
 			;;
 		*)
 			;;
