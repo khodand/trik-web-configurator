@@ -2,7 +2,6 @@
 
 read params
 
-IFS="${IFS}&"
 set $params
 
 . ./notify.sh
