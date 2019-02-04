@@ -1,10 +1,10 @@
 #!/bin/sh
 
+read params
+
 process_name="ag-config"
 . ./notify.sh
 notifyThenKill 
-
-read params
 
 set $params
 

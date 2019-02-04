@@ -1,12 +1,10 @@
 #!/bin/sh
 
-set -euox pipefail 
+read params
 
 process_name="config-writer"
 . ./notify.sh  
 notifyThenKill  
-
-read params
 
 set $params
 
