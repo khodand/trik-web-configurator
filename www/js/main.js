@@ -185,7 +185,7 @@ const app = new Vue({
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
-            xhr.send(`${this.accelerometer}&${this.accelFreq}&${this.accelRange}&${this.gyroscope}&${this.gyroFreq}&${this.gyroRange}`);
+            xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange}`);
         },
         defaultPorts() {
             this.s1 = "angularServomotor";
