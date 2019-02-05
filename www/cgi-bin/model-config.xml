@@ -3,16 +3,16 @@
 	</initScript>
 
 	<S1>
-		<quadroMotor />
+		<angularServomotor />
 	</S1>
 	<S2>
-		<quadroMotor />
+		<angularServomotor />
 	</S2>
 	<S3>
 		<angularServomotor />
 	</S3>
 	<S4>
-		<quadroEsc />
+		<angularServomotor />
 	</S4>
 	<S5>
 		<angularServomotor />

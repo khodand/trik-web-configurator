@@ -2,11 +2,11 @@
 
 read params
 
-IFS="${IFS}&"
-set $params
+process_name="config-writer"
+. ./notify.sh  
+notifyThenKill  
 
-. ./notify.sh
-myNotify 
+set $params
 
 Args="$*"
 

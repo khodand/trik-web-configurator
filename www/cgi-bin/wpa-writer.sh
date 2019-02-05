@@ -1,10 +1,11 @@
 #!/bin/sh
 
+process_name="wpa-writer"
 . ./notify.sh
-myNotify 
 
 	if [ "$REQUEST_METHOD" = "POST" ]; then
 	    read params
+	    notifyThenKill
 
 	    essidParam=${params%&*}
 	    passwordParam=${params#*&}
