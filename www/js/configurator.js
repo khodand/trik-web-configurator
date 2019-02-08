@@ -42,18 +42,48 @@ const app = new Vue({
         scriptPath: "/cgi-bin/",
         buttonChangeState: "false",
         buttonChangeLanguage: "",
-        hostName: ""
+        hostName: "",
+        flagPorts: "0",
+        flagNewName: "0",
+        flagGA: "0",
+        xhrStatusPorts: "",
+        xhrStatusPortsText: "",
+        successMessage : document.getElementById('success_msg'),
+        errorMessage : document.getElementById('error_msg')
     },
     created: function () {
+        /*var localeNumber = 10;
+        for (var i = 1; i <= localeNumber; i++) {
+            var elem = document.getElementById(i.toString());
+            elem.innerHTML = '{{ texts[lang][\'network\'] }}';
+        }*/
+        // It's some kind of duct tape for first time :)
+        document.getElementById("1").innerHTML = '{{ texts[lang][\'network\'] }}';
+        document.getElementById("2").innerHTML = '{{ texts[lang][\'port\'] }}';
+        document.getElementById("3").innerHTML = '{{\n' +
+            '            texts[lang][\'gyroscope\']\n' +
+            '        }}&{{ texts[lang][\'accelerometer\'] }}';
+
+        document.getElementById("4").innerHTML = '{{ texts[lang][\'en\'] }}';
+        document.getElementById("5").innerHTML = '{{ texts[lang][\'ru\'] }}';
+        document.getElementById("6").innerHTML = 'Wi-Fi {{ texts[lang][\'client\'] }}';
+        document.getElementById("7").innerHTML = '{{ texts[lang][\'submit\'] }}';
+        document.getElementById("8").innerHTML = '{{ texts[lang][\'accessPoint\'] }}';
+        document.getElementById("9").innerHTML = '{{ texts[lang][\'save\'] }}';
+
+
+
+
+
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
         xhr.send();
         var x = "asdas";
         if (!(xhr.status >= 200 && xhr.status < 300)) {
-          // Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
+            // Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
         } else {
-			// Здесь нужен alert об успехе	  
+            // Здесь нужен alert об успехе
             var text = xhr.responseText;
             text = text.split('\n');
             ports = text[0].split(' ');
@@ -105,6 +135,15 @@ const app = new Vue({
 
             xhr.send(params);
         },
+        getZeroFlagPorts() {
+            this.flagPorts = "0";
+        },
+        getZeroFlagNewName() {
+            this.flagNewName = "0";
+        },
+        getZeroFlagGA() {
+            this.flagGA = "0";
+        },
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -114,11 +153,13 @@ const app = new Vue({
 
             xhr.send(params);
 
-			if (!(xhr.status >= 200 && xhr.status < 300)) {
-          	// Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
-        	} else {
-			// Здесь нужен alert об успехе
-			}
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagPorts = "1";
+            } else {
+                this.flagPorts = "2";
+            }
         },
         changeLang(lang) {
             this.lang = lang;
@@ -128,11 +169,13 @@ const app = new Vue({
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
-			if (!(xhr.status >= 200 && xhr.status < 300)) {
-          	// Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
-        	} else {
-			// Здесь нужен alert об успехе
-			}
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagGA = "1";
+            } else {
+                this.flagGA = "2";
+            }
         },
         defaultPorts() {
             this.s1 = "angularServomotor";
@@ -179,21 +222,60 @@ const app = new Vue({
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.wifiName} \n`);
-			
-			if (!(xhr.status >= 200 && xhr.status < 300)) {
-          	// Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
-        	} else {
-			// Здесь нужен alert об успехе
-			}
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagNewName = "1";
+            } else {
+                this.flagNewName = "2";
+            }
         },
-        buttonSUP(){
-            if(this.buttonChangeState === "true") this.buttonChangeState = "false";
+        buttonSUP() {
+            if (this.buttonChangeState === "true") this.buttonChangeState = "false";
             else this.buttonChangeState = "true";
         },
-        regShowLanguage(){
-            if(window.innerWidth > 993) return "true";
-            else if(this.buttonChangeState === "true") return "true";
+        regShowLanguage() {
+            if (window.innerWidth > 993) return "true";
+            else if (this.buttonChangeState === "true") return "true";
             else return "false";
+        },
+        handle() {
+            alert("sfas");
+            this.successMessage.style.display = 'none';
+            this.errorMessage.style.display = 'none';
+            var essid = document.getElementById("essid").value;
+            if (!essid) {
+                this.errorMessage.innerHTML = 'Please enter wi-fi name';
+                this.errorMessage.style.display = 'block';
+                return;
+            }
+            var password = document.getElementById("password").value;
+            var paramString = "essid=" + essid;
+            if (password) {
+                paramString += "&password=" + password;
+            }
+            sendNetworkData(paramString);
+        },
+        sendNetworkData(paramString) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", "/cgi-bin/wpa-writer.sh");
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        successMessage.style.display = 'block';
+                    } else if (xhr.status == 422) {
+                        this.errorMessage.innerHTML = 'Passphrase must be 8..63 characters!';
+                        this.errorMessage.style.display = 'block';
+                    } else if (xhr.status == 500) {
+                        this.errorMessage.innerHTML = 'Internal server error. Please try again.';
+                        this.errorMessage.style.display = 'block';
+                    }
+                }
+            };
+
+            xhr.send(paramString);
         }
 
     }
