@@ -106,11 +106,11 @@
                     <a class="nav-link active text-white" data-toggle="pill" href="#home">{{
                         texts[lang]['home']
                         }}</a>-->
-                <li class="nav-item">
+                <li class="nav-item" >
                     <a class="nav-link active text-white" data-toggle="pill" href="#wifi">{{
                         texts[lang]['network'] }}</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" >
                     <a class="nav-link text-white" data-toggle="pill" href="#port">{{
                         texts[lang]['port'] }}</a>
                 </li>
@@ -147,21 +147,22 @@
                 <div class="form-group col-md-6">
 
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                        <a class="navbar-brand" href="#">Wi-fi client</a>
+                        <a class="navbar-brand" href="#">Wi-Fi {{ texts[lang]['client'] }}</a>
                     </nav>
                     <br>
 
                     <form id="submit-form" action="javascript:void(0);">
+                        <div id="success_msg" class="success">Success!</div>
+                        <div id="error_msg" class="error"></div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="essid" aria-describedby="emailHelp"
-                                   placeholder="WiFi name (SSID)">
+                                   placeholder="Wi-Fi name (SSID)">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id = "password" placeholder = 'Password'>
                         </div>
                         <button type="submit" class="btn  btn-success" style="background-color: #009933"
-                                onclick="handle()" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover"
-                                data-content="And here's some amazing content. It's very engaging. Right?">
+                                onclick="handle()">
                             {{ texts[lang]['submit'] }}
                         </button>
                     </form>
@@ -761,9 +762,9 @@
 <script src="js/configurator.js"></script>
 
 <script>
-    $(function () {
+    $(
         $('[data-toggle="popover"]').popover()
-    })
+    )
 </script>
 <script>
     $('.popover-dismiss').popover({

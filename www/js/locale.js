@@ -29,7 +29,9 @@ window.translations = {
         'infoSet': 'Данные настройки рассчитаны для опытных пользователей.',
         'network': 'Сеть',
         'submit' : 'Отправить',
-        'accessPoint' : 'Точка доступа'
+        'accessPoint' : 'Точка доступа',
+        'client' : 'клиент',
+        "password" : 'пароль'
     },
     'en': {
         'configurator': 'Сonfigurator',
@@ -61,6 +63,8 @@ window.translations = {
         'infoSet': 'These settings are designed for advanced users.',
         'network': 'Network',
         'submit' : 'Submit',
-        'accessPoint' : 'Access point'
+        'accessPoint' : 'Access point',
+        'client' : 'client',
+        "password" : 'password'
     }
 };
