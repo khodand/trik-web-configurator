@@ -35,10 +35,10 @@ const app = new Vue({
         accelFreq: "50",
         accelRange: "2G",
         wifiName: "",
-        e1State: "true",  //
-        e2State: "true",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
-        e3State: "true",  //
-        e4State: "true",  //
+        e1State: "true",  
+        e2State: "true",  
+        e3State: "true",  
+        e4State: "true",  
         scriptPath: "/cgi-bin/",
         buttonChangeState: "false",
         buttonChangeLanguage: "",
@@ -48,8 +48,6 @@ const app = new Vue({
         flagGA: "0",
         xhrStatusPorts: "",
         xhrStatusPortsText: "",
-        successMessage : document.getElementById('success_msg'),
-        errorMessage : document.getElementById('error_msg')
     },
     created: function () {
         /*var localeNumber = 10;
@@ -239,44 +237,7 @@ const app = new Vue({
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
-        handle() {
-            alert("sfas");
-            this.successMessage.style.display = 'none';
-            this.errorMessage.style.display = 'none';
-            var essid = document.getElementById("essid").value;
-            if (!essid) {
-                this.errorMessage.innerHTML = 'Please enter wi-fi name';
-                this.errorMessage.style.display = 'block';
-                return;
-            }
-            var password = document.getElementById("password").value;
-            var paramString = "essid=" + essid;
-            if (password) {
-                paramString += "&password=" + password;
-            }
-            sendNetworkData(paramString);
-        },
-        sendNetworkData(paramString) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("post", "/cgi-bin/wpa-writer.sh");
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        successMessage.style.display = 'block';
-                    } else if (xhr.status == 422) {
-                        this.errorMessage.innerHTML = 'Passphrase must be 8..63 characters!';
-                        this.errorMessage.style.display = 'block';
-                    } else if (xhr.status == 500) {
-                        this.errorMessage.innerHTML = 'Internal server error. Please try again.';
-                        this.errorMessage.style.display = 'block';
-                    }
-                }
-            };
-
-            xhr.send(paramString);
-        }
+        
 
     }
 });
