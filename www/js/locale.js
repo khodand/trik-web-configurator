@@ -58,7 +58,7 @@ window.translations = {
         'powerMotors': 'Power motors',
         'encoders': 'Encoders',
         'rangeSensors': 'Range sensors',
-        'analogSensors': 'AnalogSensor',
+        'analogSensors': 'Analog Sensor',
         'advancedSet' : 'Advanced settings',
         'infoSet': 'These settings are designed for advanced users.',
         'network': 'Network',
