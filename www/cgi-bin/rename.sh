@@ -2,7 +2,6 @@
 
 read params
 
-process_name="rename"
 . ./notify.sh
 notifyThenKill
 

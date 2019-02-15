@@ -2,7 +2,6 @@
 
 read params
 
-process_name="config-writer"
 . ./notify.sh  
 notifyThenKill  
 

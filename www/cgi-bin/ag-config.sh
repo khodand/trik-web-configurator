@@ -2,7 +2,6 @@
 
 read params
 
-process_name="ag-config"
 . ./notify.sh
 notifyThenKill 
 
