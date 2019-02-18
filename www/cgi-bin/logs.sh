@@ -2,11 +2,11 @@
 
 read params
 
-IFS="${IFS}\."
+IFS="${IFS}/"
 
 set $params
 
-number=$(ls /var/trik/log/ | grep -cE "$1") 
+number=$(ls /var/trik/log/ | grep -cE "$5") 
 
 cat << EOF
 HTTP/1.1 200 OK
@@ -16,8 +16,9 @@ Content-lenght: 10
 
 EOF
 
-if [[ number -gt 0 ]] then
-	echo "True"
+if [[ number -gt 1 ]]
+then
+	echo -n "True"
 else
-	echo "False"
+	echo -n "False" 
 fi
