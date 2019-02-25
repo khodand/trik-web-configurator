@@ -1,3 +1,17 @@
+/* Copyright 2018 - 2019 Alexander Savelev, Andrei Khodko 
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License */
+
 const app = new Vue({
     el: '#app',
     data: {
@@ -35,24 +49,53 @@ const app = new Vue({
         accelFreq: "50",
         accelRange: "2G",
         wifiName: "",
-        e1State: "true",  //
-        e2State: "true",  // эти 4 переменные привязаны к ON и OFF в енкодерах используй эти переменные
-        e3State: "true",  //
-        e4State: "true",  //
+        e1State: "true",  
+        e2State: "true",  
+        e3State: "true",  
+        e4State: "true",  
         scriptPath: "/cgi-bin/",
         buttonChangeState: "false",
         buttonChangeLanguage: "",
-        hostName: ""
+        hostName: "",
+        flagPorts: "0",
+        flagNewName: "0",
+        flagGA: "0",
+        xhrStatusPorts: "",
+        xhrStatusPortsText: "",
     },
     created: function () {
+        /*var localeNumber = 10;
+        for (var i = 1; i <= localeNumber; i++) {
+            var elem = document.getElementById(i.toString());
+            elem.innerHTML = '{{ texts[lang][\'network\'] }}';
+        }*/
+        // It's some kind of duct tape for first time :)
+        document.getElementById("1").innerHTML = '{{ texts[lang][\'network\'] }}';
+        document.getElementById("2").innerHTML = '{{ texts[lang][\'port\'] }}';
+        document.getElementById("3").innerHTML = '{{\n' +
+            '            texts[lang][\'gyroscope\']\n' +
+            '        }}&{{ texts[lang][\'accelerometer\'] }}';
+
+        document.getElementById("4").innerHTML = '{{ texts[lang][\'en\'] }}';
+        document.getElementById("5").innerHTML = '{{ texts[lang][\'ru\'] }}';
+        document.getElementById("6").innerHTML = 'Wi-Fi {{ texts[lang][\'client\'] }}';
+        document.getElementById("7").innerHTML = '{{ texts[lang][\'submit\'] }}';
+        document.getElementById("8").innerHTML = '{{ texts[lang][\'accessPoint\'] }}';
+        document.getElementById("9").innerHTML = '{{ texts[lang][\'save\'] }}';
+
+
+
+
+
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
         xhr.send();
         var x = "asdas";
-        if (xhr.status != 200) {
-            alert('Error ' + xhr.status + ': ' + xhr.statusText);
+        if (!(xhr.status >= 200 && xhr.status < 300)) {
+            // Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
         } else {
+            // Здесь нужен alert об успехе
             var text = xhr.responseText;
             text = text.split('\n');
             ports = text[0].split(' ');
@@ -104,6 +147,15 @@ const app = new Vue({
 
             xhr.send(params);
         },
+        getZeroFlagPorts() {
+            this.flagPorts = "0";
+        },
+        getZeroFlagNewName() {
+            this.flagNewName = "0";
+        },
+        getZeroFlagGA() {
+            this.flagGA = "0";
+        },
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -112,6 +164,14 @@ const app = new Vue({
             params = `S1=${this.s1} S2=${this.s2} S3=${this.s3} S4=${this.s4} S5=${this.s5} S6=${this.s6} A1=${this.a1} A2=${this.a2} A3=${this.a3} A4=${this.a4} A5=${this.a5} A6=${this.a6} D1=${this.d1} D2=${this.d2} D3=${this.d3} E1=${this.e1}?${this.e1State} E2=${this.e2}?${this.e2State} E3=${this.e3}?${this.e3State} E4=${this.e4}?${this.e4State} M1=${this.m1} M2=${this.m2} M3=${this.m3} M4=${this.m4} video1=${this.video1} video2=${this.video2} \n`
 
             xhr.send(params);
+
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagPorts = "1";
+            } else {
+                this.flagPorts = "2";
+            }
         },
         changeLang(lang) {
             this.lang = lang;
@@ -121,6 +181,13 @@ const app = new Vue({
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagGA = "1";
+            } else {
+                this.flagGA = "2";
+            }
         },
         defaultPorts() {
             this.s1 = "angularServomotor";
@@ -167,16 +234,24 @@ const app = new Vue({
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.wifiName} \n`);
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.flagNewName = "1";
+            } else {
+                this.flagNewName = "2";
+            }
         },
-        buttonSUP(){
-            if(this.buttonChangeState === "true") this.buttonChangeState = "false";
+        buttonSUP() {
+            if (this.buttonChangeState === "true") this.buttonChangeState = "false";
             else this.buttonChangeState = "true";
         },
-        regShowLanguage(){
-            if(window.innerWidth > 993) return "true";
-            else if(this.buttonChangeState === "true") return "true";
+        regShowLanguage() {
+            if (window.innerWidth > 993) return "true";
+            else if (this.buttonChangeState === "true") return "true";
             else return "false";
-        }
+        },
+        
 
     }
 });

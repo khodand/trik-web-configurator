@@ -1,3 +1,17 @@
+/* Copyright 2018 - 2019 Alexander Savelev 
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License */
+
 window.translations = {
     'ru': {
         'configurator': 'Конфигуратор',
@@ -29,7 +43,14 @@ window.translations = {
         'infoSet': 'Данные настройки рассчитаны для опытных пользователей.',
         'network': 'Сеть',
         'submit' : 'Отправить',
-        'accessPoint' : 'Точка доступа'
+        'accessPoint' : 'Точка доступа',
+        'client' : 'клиент',
+        "password" : 'пароль',
+        "saved" : "Сохранено!",
+        "fail" : "Не удалось!",
+        "savedPorts" : "Ваши изменения были успешно сохранены",
+        "codeError" : "Код ошибки:",
+        "tryNextTime" : "Пожалуйста, попробуйте еще раз"
     },
     'en': {
         'configurator': 'Сonfigurator',
@@ -56,11 +77,18 @@ window.translations = {
         'powerMotors': 'Power motors',
         'encoders': 'Encoders',
         'rangeSensors': 'Range sensors',
-        'analogSensors': 'AnalogSensor',
+        'analogSensors': 'Analog Sensor',
         'advancedSet' : 'Advanced settings',
         'infoSet': 'These settings are designed for advanced users.',
         'network': 'Network',
         'submit' : 'Submit',
-        'accessPoint' : 'Access point'
+        'accessPoint' : 'Access point',
+        'client' : 'client',
+        "password" : 'password',
+        "saved" : "Saved!",
+        "fail" : "Fail!",
+        "savedSettings" : "Your modifications was saved successfully",
+        "codeError" : "Status code:",
+        "tryNextTime" : "Please, try again"
     }
 };
