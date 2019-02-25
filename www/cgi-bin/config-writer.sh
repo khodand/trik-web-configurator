@@ -2,8 +2,7 @@
 
 read params
 
-. ./notify.sh  
-notifyThenKill  
+./notifyThenKill.sh $(basename -- "$0") $params $$
 
 set $params
 
@@ -36,7 +35,7 @@ do
 		encoder=${device%\?*}
 		invert=${device#*\?}
 		ports_config=$ports_config" "$encoder" "$invert
-		echo "		<$encoder invert=\"$invert\" />" >> $model_config 
+		echo "		<$encoder invert=\"$invert\" />" >> $model_config
 	else
 		ports_config=$ports_config" "$device
 		echo "		<$device />" >> $model_config
@@ -69,7 +68,7 @@ cat >> $model_config << EOF
 </config>
 EOF
 
-cp $model_config /home/root/trik/ 
+cp $model_config /home/root/trik/
 
 echo "HTTP/1.1 201 Modified"
 
