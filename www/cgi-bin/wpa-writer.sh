@@ -2,7 +2,7 @@
 
 	if [ "$REQUEST_METHOD" = "POST" ]; then
 	    read params
-	    ./notifyThenKill.sh $(basename -- "$0") $params $$
+		./notifyThenKill.sh $(basename -- "$0") $$ $params
 
 	    essidParam=${params%&*}
 	    passwordParam=${params#*&}

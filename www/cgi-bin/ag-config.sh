@@ -16,7 +16,7 @@
 
 read params
 
-./notifyThenKill.sh $(basename -- "$0") $params $$
+./notifyThenKill.sh $(basename -- "$0") $$ $params
 
 set $params
 
