@@ -16,9 +16,7 @@
 
 read params
 
-process_name="ag-config"
-. ./notify.sh
-notifyThenKill 
+./notifyThenKill.sh $(basename -- "$0") $params $$
 
 set $params
 

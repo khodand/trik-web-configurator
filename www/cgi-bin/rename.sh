@@ -16,9 +16,7 @@
 
 read params
 
-process_name="rename"
-. ./notify.sh
-notifyThenKill
+./notifyThenKill.sh $(basename -- "$0") $params $$
 
 echo "$params" > /etc/hostname
 
