@@ -251,6 +251,9 @@ const app = new Vue({
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
+        hullConfig() {
+            // send request ...
+        },
         
 
     }

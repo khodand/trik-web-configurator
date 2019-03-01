@@ -96,10 +96,12 @@
 
 <script src="js/vue.min.js"></script>
 
+
 <div id="app" style="position:absolute; top:0; left:0; right:0; bottom: 0; overflow-y: scroll;">
 
     <nav class="navbar navbar-expand-lg navbar-dark nav-cera-style" style="background-color: #001A42">
 
+        <!--Top menu panel -->
         <a href="#home" class="navbar-left mr-3"><img src="images/logo-eng-lightgreen-purple-1000x1000.png"
                                                       width="80"></a>
 
@@ -113,7 +115,6 @@
 
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
 
             <ul class="nav nav-pills navbar-nav mr-auto pull-left">
                 <!--<li class="nav-item">
@@ -148,6 +149,7 @@
         </div>
     </nav>
 
+
     <div class="tab-content main-navigation" style="padding: 20px;">
         <!--<div class="tab-pane fade show active active" id="home">
             <input type="button" onclick="this.style.display='none';" value="Hide It!"/>
@@ -178,7 +180,7 @@
                             Submit
                         </button>
 
-                        <!--<div class="modal fade" id="DefaultLoginCenter" tabindex="-1" role="dialog"
+                        <!-- <div class="modal fade" id="DefaultLoginCenter" tabindex="-1" role="dialog"
                              aria-labelledby="DefaultModalCenter"
                              aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -204,11 +206,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>-->
+                        </div> -->
 
                     </form>
 
                 </div>
+
 
                 <div class="form-group col-md-6">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
@@ -269,6 +272,33 @@
                         </div>
                     </div>
                 </div>
+
+                    <div class="form-group col-md-6">
+                        <!-- Form Name -->
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
+                            <a class="navbar-brand" id = "8" href="#">Взаимодействие роботов</a>
+                        </nav>
+                        <br>
+                                <!-- <legend>Взаимодействие роботов</legend> -->
+
+                        <form id="subm111it-form">
+                        <!-- Text input-->
+                        <div class="form-group">
+                                <input id="hullNumber" name="hullNumber" type="text" placeholder="Бортномер" class="form-control input-md">
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                                <input id="leaderIP" name="leaderIP" type="text" placeholder="IP ведущего" class="form-control input-md">
+                        </div>
+
+                        <!-- Button -->
+                        <div class="form-group">
+                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" onclick="hullConfig()">Сохранить</button>
+                        </div>
+                        </form>
+                    </div>
+
             </div>
         </div>
         <div class="tab-pane fade" id="port">
