@@ -15,8 +15,17 @@
 const app = new Vue({
     el: '#app',
     data: {
+        // Top menu
         texts: window.translations,
         lang: 'en',
+        buttonChangeState: "false",
+        buttonChangeLanguage: "",
+        // Network
+        wifiName: "",
+        hostName: "",
+        hullNumber: "",
+        leaderIP: "",
+        // Ports
         s1: "angularServomotor",
         s2: "angularServomotor",
         s3: "angularServomotor",
@@ -42,33 +51,27 @@ const app = new Vue({
         m4: "motor350",
         video1: "lineSensor",
         video2: "photo",
+        e1State: "true",
+        e2State: "true",
+        e4State: "true",
+        e3State: "true",
+        // Gyroscope and accelerometer
         gyroscope: "ON",
         accelerometer: "ON",
         gyroFreq: "95",
         gyroRange: "2000",
         accelFreq: "50",
         accelRange: "2G",
-        wifiName: "",
-        e1State: "true",  
-        e2State: "true",  
-        e3State: "true",  
-        e4State: "true",  
-        scriptPath: "/cgi-bin/",
-        buttonChangeState: "false",
-        buttonChangeLanguage: "",
-        hostName: "",
+        // Success(Error) message
         flagPorts: "0",
         flagNewName: "0",
         flagGA: "0",
         xhrStatusPorts: "",
         xhrStatusPortsText: "",
+        // Other (not front usage)
+        scriptPath: "/cgi-bin/",
     },
     created: function () {
-        /*var localeNumber = 10;
-        for (var i = 1; i <= localeNumber; i++) {
-            var elem = document.getElementById(i.toString());
-            elem.innerHTML = '{{ texts[lang][\'network\'] }}';
-        }*/
         // It's some kind of duct tape for first time :)
         document.getElementById("1").innerHTML = '{{ texts[lang][\'network\'] }}';
         document.getElementById("2").innerHTML = '{{ texts[lang][\'port\'] }}';
@@ -252,7 +255,15 @@ const app = new Vue({
             else return "false";
         },
         hullConfig() {
-            // send request ...
+            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) != -1 || this.leaderIP.search(/^\d\d\d.\d\d\d.\d\d\d.\d\d\d$/) == -1 )
+                alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
+            else {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", this.scriptPath + "ag-config.sh");
+                xhr.setRequestHeader('Content-Type', 'text-plain');
+                xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
+            }
+
         },
         
 
