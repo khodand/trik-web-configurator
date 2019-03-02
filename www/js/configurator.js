@@ -245,7 +245,7 @@ const app = new Vue({
                 this.flagNewName = "2";
             }
         },
-        buttonSUP() {
+        buttonSUP() { //teesrt
             if (this.buttonChangeState === "true") this.buttonChangeState = "false";
             else this.buttonChangeState = "true";
         },
