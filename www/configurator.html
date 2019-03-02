@@ -284,17 +284,17 @@
                         <form id="subm111it-form">
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="hullNumber" name="hullNumber" type="text" placeholder="Бортномер" class="form-control input-md">
+                                <input id="hullNumber" v-model="hullNumber" name="hullNumber" type="text" placeholder="Бортномер" class="form-control input-md">
                         </div>
 
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="leaderIP" name="leaderIP" type="text" placeholder="IP ведущего" class="form-control input-md">
+                                <input id="leaderIP" v-model="leaderIP" name="leaderIP" type="text" placeholder="IP ведущего" class="form-control input-md">
                         </div>
 
                         <!-- Button -->
                         <div class="form-group">
-                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" onclick="hullConfig()">Сохранить</button>
+                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" @click="hullConfig()">Сохранить</button>
                         </div>
                         </form>
                     </div>
