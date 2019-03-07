@@ -22,6 +22,6 @@ set $params
 
 settings=/home/root/trik/localSettings.ini
 
-sed -i "/hullNumber/c hullNumber=$1" $settings
+sed -i "/hullNumber=/c hullNumber=$1" $settings
 
-sed -i "/server/c server=$2" $settings
+sed -i "/server=/c server=$2" $settings
