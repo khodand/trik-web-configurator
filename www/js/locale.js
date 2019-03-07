@@ -45,12 +45,12 @@ window.translations = {
         'submit' : 'Отправить',
         'accessPoint' : 'Точка доступа',
         'client' : 'клиент',
-        "password" : 'пароль',
-        "saved" : "Сохранено!",
-        "fail" : "Не удалось!",
-        "savedPorts" : "Ваши изменения были успешно сохранены",
-        "codeError" : "Код ошибки:",
-        "tryNextTime" : "Пожалуйста, попробуйте еще раз"
+        'password' : 'пароль',
+        'saved' : 'Сохранено!',
+        'fail' : 'Не удалось!',
+        'savedPorts' : 'Ваши изменения были успешно сохранены',
+        'codeError' : 'Код ошибки:',
+        'tryNextTime' : 'Пожалуйста, попробуйте еще раз'
     },
     'en': {
         'configurator': 'Сonfigurator',
@@ -84,11 +84,11 @@ window.translations = {
         'submit' : 'Submit',
         'accessPoint' : 'Access point',
         'client' : 'client',
-        "password" : 'password',
-        "saved" : "Saved!",
-        "fail" : "Fail!",
-        "savedSettings" : "Your modifications was saved successfully",
-        "codeError" : "Status code:",
-        "tryNextTime" : "Please, try again"
+        'password' : 'password',
+        'saved' : 'Saved!',
+        'fail' : 'Fail!',
+        'savedSettings' : 'Your modifications was saved successfully',
+        'codeError' : 'Status code:',
+        'tryNextTime' : 'Please, try again'
     }
 };
