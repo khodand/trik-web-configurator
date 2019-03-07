@@ -50,7 +50,10 @@ window.translations = {
         'fail' : 'Не удалось!',
         'savedPorts' : 'Ваши изменения были успешно сохранены',
         'codeError' : 'Код ошибки:',
-        'tryNextTime' : 'Пожалуйста, попробуйте еще раз'
+        'tryNextTime' : 'Пожалуйста, попробуйте еще раз',
+        'robotsInteraction' : 'Взаимодействие роботов',
+        'hullNumber' : 'Бортовой номер',
+        'leaderIP' : 'IP ведущего',
     },
     'en': {
         'configurator': 'Сonfigurator',
@@ -89,6 +92,9 @@ window.translations = {
         'fail' : 'Fail!',
         'savedSettings' : 'Your modifications was saved successfully',
         'codeError' : 'Status code:',
-        'tryNextTime' : 'Please, try again'
+        'tryNextTime' : 'Please, try again',
+        'robotsInteraction' : 'Robots interaction',
+        'hullNumber' : 'Hull number',
+        'leaderIP' : 'Leader IP',
     }
 };

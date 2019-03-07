@@ -1,4 +1,4 @@
-<!-- Copyright 2018 - 2019 Alexander Savelev
+<!-- Copyright 2018 - 2019 Alexander Savelev, Andrei Khodko
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -276,7 +276,7 @@
                     <div class="form-group col-md-6">
                         <!-- Form Name -->
                         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                            <a class="navbar-brand" id = "8" href="#">Взаимодействие роботов</a>
+                            <a class="navbar-brand" id = "8" href="#">{{ texts[lang]['robotsInteraction'] }}</a>
                         </nav>
                         <br>
                                 <!-- <legend>Взаимодействие роботов</legend> -->
@@ -284,17 +284,17 @@
 			<!-- <form id="subm111it-form"> -->
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="hullNumber" v-model="hullNumber" name="hullNumber" type="text" placeholder="Бортномер" class="form-control input-md">
+                                <input id="hullNumber" v-model="hullNumber" name="hullNumber" type="text" :placeholder="texts[lang]['hullNumber']" class="form-control input-md">
                         </div>
 
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="leaderIP" v-model="leaderIP" name="leaderIP" type="text" placeholder="IP ведущего" class="form-control input-md">
+                                <input id="leaderIP" v-model="leaderIP" name="leaderIP" type="text" :placeholder="texts[lang]['leaderIP']" class="form-control input-md">
                         </div>
 
                         <!-- Button -->
                         <div class="form-group">
-                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" @click="hullConfig()">Сохранить</button>
+                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" @click="hullConfig()">{{ texts[lang]['save'] }}</button>
                         </div>
 			<!-- </form> -->
                     </div>
