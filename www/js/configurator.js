@@ -255,11 +255,11 @@ const app = new Vue({
             else return "false";
         },
         hullConfig() {
-            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) != -1 || this.leaderIP.search(/^\d\d\d.\d\d\d.\d\d\d.\d\d\d$/) == -1 )
+            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) != -1 || this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) == -1 )
                 alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
             else {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", this.scriptPath + "ag-config.sh");
+                xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
             }
