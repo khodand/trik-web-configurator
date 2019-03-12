@@ -71,25 +71,7 @@ const app = new Vue({
         // Other (not front usage)
         scriptPath: "/cgi-bin/",
     },
-    created: function () {
-        // It's some kind of duct tape for first time :)
-        document.getElementById("1").innerHTML = '{{ texts[lang][\'network\'] }}';
-        document.getElementById("2").innerHTML = '{{ texts[lang][\'port\'] }}';
-        document.getElementById("3").innerHTML = '{{\n' +
-            '            texts[lang][\'gyroscope\']\n' +
-            '        }}&{{ texts[lang][\'accelerometer\'] }}';
-
-        document.getElementById("4").innerHTML = '{{ texts[lang][\'en\'] }}';
-        document.getElementById("5").innerHTML = '{{ texts[lang][\'ru\'] }}';
-        document.getElementById("6").innerHTML = 'Wi-Fi {{ texts[lang][\'client\'] }}';
-        document.getElementById("7").innerHTML = '{{ texts[lang][\'submit\'] }}';
-        document.getElementById("8").innerHTML = '{{ texts[lang][\'accessPoint\'] }}';
-        document.getElementById("9").innerHTML = '{{ texts[lang][\'save\'] }}';
-
-
-
-
-
+    beforeCreate: function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
@@ -255,7 +237,8 @@ const app = new Vue({
             else return "false";
         },
         hullConfig() {
-            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) != -1 || this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) == -1 )
+            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) !== -1 ||
+                this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) === -1 )
                 alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
             else {
                 var xhr = new XMLHttpRequest();

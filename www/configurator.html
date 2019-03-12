@@ -93,12 +93,11 @@
 
     </style>
 </head>
+<body>
 
 <script src="js/vue.min.js"></script>
 
-
 <div id="app" style="position:absolute; top:0; left:0; right:0; bottom: 0; overflow-y: scroll;">
-
     <nav class="navbar navbar-expand-lg navbar-dark nav-cera-style" style="background-color: #001A42">
 
         <!--Top menu panel -->
@@ -122,10 +121,10 @@
                         texts[lang]['home']
                         }}</a>-->
                 <li class="nav-item">
-                    <a class="nav-link active text-white" id="1" data-toggle="pill" href="#wifi">Network</a>
+                    <a class="nav-link active text-white" v-text="texts[lang]['network']" data-toggle="pill" href="#wifi" >Network</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" id="2" data-toggle="pill" href="#port">Ports</a>
+                    <a class="nav-link text-white" v-text="texts[lang]['port']" data-toggle="pill" href="#port">Ports</a>
                 </li>
                 <!--<li class="nav-item">
                     <a class="nav-link text-white" id="3" data-toggle="pill" href="#ga">
@@ -140,11 +139,11 @@
 
         <div class="btn-group btn-group-toggle" v-if="regShowLanguage() === 'true'" role="buttons"
              aria-label="Basic example">
-            <button type="button" class="btn btn-success" id = "4" @click="changeLang('en')"
-                    v-bind:class="{ active: lang=='en' }">En
+            <button type="button" class="btn btn-success" @click="changeLang('en')"
+                    v-text="texts[lang]['en']" v-bind:class="{ active: lang=='en' }">En
             </button>
-            <button type="button" class="btn btn-success" id = "5" @click="changeLang('ru')"
-                    v-bind:class="{ active: lang=='ru' }">Ru
+            <button type="button" class="btn btn-success" @click="changeLang('ru')"
+                    v-text="texts[lang]['ru']" v-bind:class="{ active: lang=='ru' }">Ru
             </button>
         </div>
     </nav>
@@ -161,7 +160,7 @@
                 <div class="form-group col-md-6">
 
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                        <a class="navbar-brand" href="#" id = "6">Wi-Fi client</a>
+                        <a class="navbar-brand" v-text="'Wi-Fi ' + texts[lang]['client']" href="#" >Wi-Fi client</a>
                     </nav>
                     <br>
 
@@ -170,13 +169,13 @@
                         <div id="error_msg" class="error"></div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="essid" aria-describedby="emailHelp"
-                                   placeholder="Wi-Fi name (SSID)">
+                                   placeholder="Wi-Fi name (SSID)" :placeholder="'Wi-Fi ' + texts[lang]['name'] + ' (SSID)'">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password" placeholder='Password'>
+                            <input type="password" class="form-control" id="password" placeholder='Password' :placeholder="texts[lang]['password']">
                         </div>
                         <button type="submit" class="btn  btn-success" style="background-color: #009933"
-                                data-toggle="modal" data-target="#DefaultLoginCenter" id="7" onclick="handle()">
+                                data-toggle="modal" data-target="#DefaultLoginCenter" v-text="texts[lang]['submit']" onclick="handle()">
                             Submit
                         </button>
 
@@ -215,15 +214,15 @@
 
                 <div class="form-group col-md-6">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                        <a class="navbar-brand" id = "8" href="#">Access point</a>
+                        <a class="navbar-brand" v-text="texts[lang]['accessPoint']" href="#">Access point</a>
                     </nav>
                     <br>
                     <div class="input-group mb-3">
-                        <input type="text" v-model="wifiName" class="form-control" placeholder="New hostname"
+                        <input type="text" v-model="wifiName" class="form-control" placeholder="New hostname" :placeholder="texts[lang]['newHostname']"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn  btn-success" type="button" @click="getZeroFlagNewName()"
-                                    data-toggle="modal" id="9" data-target="#DefaultNewNameCenter">Save
+                                    data-toggle="modal" v-text="texts[lang]['save']" data-target="#DefaultNewNameCenter">Save
                             </button>
 
                             <div class="modal fade" id="DefaultNewNameCenter" tabindex="-1" role="dialog"
@@ -276,7 +275,7 @@
                     <div class="form-group col-md-6">
                         <!-- Form Name -->
                         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 10px">
-                            <a class="navbar-brand" id = "8" href="#">{{ texts[lang]['robotsInteraction'] }}</a>
+                            <a class="navbar-brand" v-text="texts[lang]['robotsInteraction']" href="#">Robots interaction</a>
                         </nav>
                         <br>
                                 <!-- <legend>Взаимодействие роботов</legend> -->
@@ -284,17 +283,17 @@
 			<!-- <form id="subm111it-form"> -->
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="hullNumber" v-model="hullNumber" name="hullNumber" type="text" :placeholder="texts[lang]['hullNumber']" class="form-control input-md">
+                                <input id="hullNumber" v-model="hullNumber" name="hullNumber" type="text" placeholder="Hull number" :placeholder="texts[lang]['hullNumber']" class="form-control input-md">
                         </div>
 
                         <!-- Text input-->
                         <div class="form-group">
-                                <input id="leaderIP" v-model="leaderIP" name="leaderIP" type="text" :placeholder="texts[lang]['leaderIP']" class="form-control input-md">
+                                <input id="leaderIP" v-model="leaderIP" name="leaderIP" type="text" placeholder="Leader IP" :placeholder="texts[lang]['leaderIP']" class="form-control input-md">
                         </div>
 
                         <!-- Button -->
                         <div class="form-group">
-                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" @click="hullConfig()">{{ texts[lang]['save'] }}</button>
+                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" v-text="texts[lang]['save']" @click="hullConfig()">Save</button>
                         </div>
 			<!-- </form> -->
                     </div>
@@ -894,12 +893,14 @@
         </div>
     </div>
 </div>
+
 <script src="js/popper.min.js"></script>
 <script src="js/jQueryCompressed.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/handler.js"></script>
 <script src="js/locale.js"></script>
 <script src="js/configurator.js"></script>
+
 
 <script>
     $(
