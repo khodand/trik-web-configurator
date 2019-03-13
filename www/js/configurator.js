@@ -15,8 +15,17 @@
 const app = new Vue({
     el: '#app',
     data: {
+        // Top menu
         texts: window.translations,
         lang: 'en',
+        buttonChangeState: "false",
+        buttonChangeLanguage: "",
+        // Network
+        wifiName: "",
+        hostName: "",
+        hullNumber: "",
+        leaderIP: "",
+        // Ports
         s1: "angularServomotor",
         s2: "angularServomotor",
         s3: "angularServomotor",
@@ -42,51 +51,27 @@ const app = new Vue({
         m4: "motor350",
         video1: "lineSensor",
         video2: "photo",
+        e1State: "true",
+        e2State: "true",
+        e4State: "true",
+        e3State: "true",
+        // Gyroscope and accelerometer
         gyroscope: "ON",
         accelerometer: "ON",
         gyroFreq: "95",
         gyroRange: "2000",
         accelFreq: "50",
         accelRange: "2G",
-        wifiName: "",
-        e1State: "true",  
-        e2State: "true",  
-        e3State: "true",  
-        e4State: "true",  
-        scriptPath: "/cgi-bin/",
-        buttonChangeState: "false",
-        buttonChangeLanguage: "",
-        hostName: "",
+        // Success(Error) message
         flagPorts: "0",
         flagNewName: "0",
         flagGA: "0",
         xhrStatusPorts: "",
         xhrStatusPortsText: "",
+        // Other (not front usage)
+        scriptPath: "/cgi-bin/",
     },
-    created: function () {
-        /*var localeNumber = 10;
-        for (var i = 1; i <= localeNumber; i++) {
-            var elem = document.getElementById(i.toString());
-            elem.innerHTML = '{{ texts[lang][\'network\'] }}';
-        }*/
-        // It's some kind of duct tape for first time :)
-        document.getElementById("1").innerHTML = '{{ texts[lang][\'network\'] }}';
-        document.getElementById("2").innerHTML = '{{ texts[lang][\'port\'] }}';
-        document.getElementById("3").innerHTML = '{{\n' +
-            '            texts[lang][\'gyroscope\']\n' +
-            '        }}&{{ texts[lang][\'accelerometer\'] }}';
-
-        document.getElementById("4").innerHTML = '{{ texts[lang][\'en\'] }}';
-        document.getElementById("5").innerHTML = '{{ texts[lang][\'ru\'] }}';
-        document.getElementById("6").innerHTML = 'Wi-Fi {{ texts[lang][\'client\'] }}';
-        document.getElementById("7").innerHTML = '{{ texts[lang][\'submit\'] }}';
-        document.getElementById("8").innerHTML = '{{ texts[lang][\'accessPoint\'] }}';
-        document.getElementById("9").innerHTML = '{{ texts[lang][\'save\'] }}';
-
-
-
-
-
+    beforeCreate: function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
@@ -242,7 +227,7 @@ const app = new Vue({
                 this.flagNewName = "2";
             }
         },
-        buttonSUP() {
+        buttonSUP() { //teesrt
             if (this.buttonChangeState === "true") this.buttonChangeState = "false";
             else this.buttonChangeState = "true";
         },
@@ -250,6 +235,18 @@ const app = new Vue({
             if (window.innerWidth > 993) return "true";
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
+        },
+        hullConfig() {
+            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) !== -1 ||
+                this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) === -1 )
+                alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
+            else {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", this.scriptPath + "hull-config.sh");
+                xhr.setRequestHeader('Content-Type', 'text-plain');
+                xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
+            }
+
         },
         
 
