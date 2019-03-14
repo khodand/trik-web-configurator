@@ -127,6 +127,18 @@ const app = new Vue({
             this.dialogFlag = "waiting";
         },
 
+        xhrOnReadyFunction(xhr) {
+            if (xhr.readyState != 4) return;
+
+            this.xhrStatusPorts = xhr.status;
+            this.xhrStatusPortsText = xhr.statusText;
+            if (!(xhr.status >= 200 && xhr.status < 300)) {
+                this.dialogFlag = "fail";
+            } else {
+                this.dialogFlag = "success";
+            }
+        },
+
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -136,13 +148,8 @@ const app = new Vue({
 
             xhr.send(params);
 
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.dialogFlag = "fail";
-            } else {
-                this.dialogFlag = "success";
-            }
+            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+
         },
 
         changeLang(lang) {
@@ -155,13 +162,8 @@ const app = new Vue({
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
 
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.dialogFlag = "fail";
-            } else {
-                this.dialogFlag = "success";
-            }
+            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+
         },
 
         defaultPorts() {
@@ -212,39 +214,13 @@ const app = new Vue({
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.wifiName} \n`);
 
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.dialogFlag = "fail";
-            } else {
-                this.dialogFlag = "success";
-            }
+            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
         },
 
         regShowLanguage() {
             if (window.innerWidth > 993) return "true";
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
-        },
-
-        xhrOnTimeoutFunction(xhr) {
-            xhr.abort();
-            this.xhrStatusPorts = "504";
-            this.xhrStatusPortsText = "Gateway Timeout";
-            this.dialogFlag = "fail";
-        },
-	xhrOnReadyFunction(xhr) {
-		alert(xhr.readyState);
-	        if (xhr.readyState != 4) { return; }
-
-	        this.xhrStatusPorts = xhr.status;
-	        this.xhrStatusPortsText = xhr.statusText;
-		//alert(xhr.readyState + "sssssssssssssssssss");
-	        if (!(xhr.status >= 200 && xhr.status < 300)) {
-	            this.dialogFlag = "fail";
-	        } else {
-	            this.dialogFlag = "success";
-	        }
         },
 	
         hullConfig() {
@@ -258,8 +234,7 @@ const app = new Vue({
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
 
-		xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
-                //xhr.ontimeout = this.xhrOnTimeoutFunction(xhr);
+		        xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
             }
         },
     }
