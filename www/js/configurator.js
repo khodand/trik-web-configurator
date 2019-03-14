@@ -69,7 +69,7 @@ const app = new Vue({
         // Other (not front usage)
         scriptPath: "/cgi-bin/",
     },
-    beforeCreate: function () {
+    created: function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
@@ -226,6 +226,22 @@ const app = new Vue({
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
+	xhrReadt(xhr) {
+            alert(xhr.readyState);
+	if (xhr.readyState != 4) return;
+
+		        this.xhrStatusPorts = xhr.status;
+		        this.xhrStatusPortsText = xhr.statusText;
+		        if (!(xhr.status >= 200 && xhr.status < 300)) {
+		            this.dialogFlag = "fail";
+		        } else {
+			    alert("sssssssssss");
+		            this.dialogFlag = "success";
+		        }
+	   
+
+        },
+	
         hullConfig() {
             if (this.hullNumber.search(/[\D]/) !== -1 ||
                 this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) === -1 )
@@ -235,14 +251,10 @@ const app = new Vue({
                 xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
-
-                this.xhrStatusPorts = xhr.status;
-                this.xhrStatusPortsText = xhr.statusText;
-                if (!(xhr.status >= 200 && xhr.status < 300)) {
-                    this.dialogFlag = "fail";
-                } else {
-                    this.dialogFlag = "success";
-                }
+		
+		
+		xhr.onreadystatechange = this.xhrReadt(xhr);
+		        
             }
 
         },
