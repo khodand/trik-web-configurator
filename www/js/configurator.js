@@ -233,15 +233,13 @@ const app = new Vue({
             this.xhrStatusPortsText = "Gateway Timeout";
             this.dialogFlag = "fail";
         },
-	    xhrOnReadyFunction(xhr) {
-            //alert(xhr.readyState);
-            if (xhr.status == 404) {
-                this.dialogFlag = "fail";
-            }
-	        if (xhr.readyState != 4) return;
+	xhrOnReadyFunction(xhr) {
+		alert(xhr.readyState);
+	        if (xhr.readyState != 4) { return; }
 
 	        this.xhrStatusPorts = xhr.status;
 	        this.xhrStatusPortsText = xhr.statusText;
+		//alert(xhr.readyState + "sssssssssssssssssss");
 	        if (!(xhr.status >= 200 && xhr.status < 300)) {
 	            this.dialogFlag = "fail";
 	        } else {
@@ -260,7 +258,7 @@ const app = new Vue({
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
 
-		        xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+		xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
                 //xhr.ontimeout = this.xhrOnTimeoutFunction(xhr);
             }
         },
