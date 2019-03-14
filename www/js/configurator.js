@@ -81,7 +81,7 @@ const app = new Vue({
             // Здесь нужен alert об успехе
             var text = xhr.responseText;
             text = text.split('\n');
-            ports = text[0].split(' ');
+            var ports = text[0].split(' ');
             ag = text[1].split(' ');
         }
         this.s1 = ports[0];
@@ -226,20 +226,27 @@ const app = new Vue({
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
-	xhrReadt(xhr) {
-            alert(xhr.readyState);
-	if (xhr.readyState != 4) return;
 
-		        this.xhrStatusPorts = xhr.status;
-		        this.xhrStatusPortsText = xhr.statusText;
-		        if (!(xhr.status >= 200 && xhr.status < 300)) {
-		            this.dialogFlag = "fail";
-		        } else {
-			    alert("sssssssssss");
-		            this.dialogFlag = "success";
-		        }
-	   
+        xhrOnTimeoutFunction(xhr) {
+            xhr.abort();
+            this.xhrStatusPorts = "504";
+            this.xhrStatusPortsText = "Gateway Timeout";
+            this.dialogFlag = "fail";
+        },
+	    xhrOnReadyFunction(xhr) {
+            //alert(xhr.readyState);
+            if (xhr.status == 404) {
+                this.dialogFlag = "fail";
+            }
+	        if (xhr.readyState != 4) return;
 
+	        this.xhrStatusPorts = xhr.status;
+	        this.xhrStatusPortsText = xhr.statusText;
+	        if (!(xhr.status >= 200 && xhr.status < 300)) {
+	            this.dialogFlag = "fail";
+	        } else {
+	            this.dialogFlag = "success";
+	        }
         },
 	
         hullConfig() {
@@ -248,18 +255,15 @@ const app = new Vue({
                 this.dialogFlag = "wrongInput";
             else {
                 var xhr = new XMLHttpRequest();
+                xhr.timeout = 700000;
                 xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
-		
-		
-		xhr.onreadystatechange = this.xhrReadt(xhr);
-		        
+
+		        xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+                //xhr.ontimeout = this.xhrOnTimeoutFunction(xhr);
             }
-
         },
-        
-
     }
 });
 
