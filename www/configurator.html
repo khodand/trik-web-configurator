@@ -116,16 +116,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="nav nav-pills navbar-nav mr-auto pull-left">
-                <!--<li class="nav-item">
-                    <a class="nav-link active text-white" data-toggle="pill" href="#home">{{
-                        texts[lang]['home']
-                        }}</a>-->
                 <li class="nav-item">
                     <a class="nav-link active text-white" v-text="texts[lang]['network']" data-toggle="pill" href="#wifi" >Network</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" v-text="texts[lang]['port']" data-toggle="pill" href="#port">Ports</a>
                 </li>
+                <!--DO NOT TOUCH THIS COMMENT. GA don't work so we hide it for now -->
                 <!--<li class="nav-item">
                     <a class="nav-link text-white" id="3" data-toggle="pill" href="#ga">
                         Gyroscope&Accelerometer
@@ -175,40 +172,10 @@
                             <input type="password" class="form-control" id="password" placeholder='Password' :placeholder="texts[lang]['password']">
                         </div>
                         <button type="submit" class="btn  btn-success" style="background-color: #009933"
-                                data-toggle="modal" data-target="#DefaultLoginCenter" v-text="texts[lang]['submit']" onclick="handle()">
-                            Submit
+                                data-toggle="modal" data-target="#DefaultLoginCenter" v-text="texts[lang]['save']" onclick="handle()">
+                            Save
                         </button>
-
-                        <!-- <div class="modal fade" id="DefaultLoginCenter" tabindex="-1" role="dialog"
-                             aria-labelledby="DefaultModalCenter"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="Login">{{ texts[lang]['confirm'] }}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        {{ texts[lang]['confirmOffer'] }}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
-                                            texts[lang]['no']
-                                            }}
-                                        </button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="handle()">
-                                            {{
-                                            texts[lang]['yes'] }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </form>
-
                 </div>
 
 
@@ -221,48 +188,56 @@
                         <input type="text" v-model="wifiName" class="form-control" placeholder="New hostname" :placeholder="texts[lang]['newHostname']"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn  btn-success" type="button" @click="getZeroFlagNewName()"
-                                    data-toggle="modal" v-text="texts[lang]['save']" data-target="#DefaultNewNameCenter">Save
+                            <button class="btn  btn-success" type="button" @click="refreshDialogFlag()"
+                                    data-toggle="modal" v-text="texts[lang]['save']" data-target="#SaveHostnameDialog">
+                                Save
                             </button>
 
-                            <div class="modal fade" id="DefaultNewNameCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="DefaultModalCenter"
-                                 aria-hidden="true">
+                            <div class="modal fade" id="SaveHostnameDialog" tabindex="-1" role="dialog"
+                                 aria-labelledby="SaveHostnameDialog" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" v-if="flagNewName === '0'">{{ texts[lang]['confirm']
-                                                }}</h5>
-                                            <h5 class="modal-title" v-else-if="flagNewName === '1'">{{
-                                                texts[lang]['fail'] }}</h5>
-                                            <h5 class="modal-title" v-else>{{ texts[lang]['saved'] }}</h5>
+                                            <h5 class="modal-title" v-if="dialogFlag === 'waiting'">{{ texts[lang]['confirm'] }}</h5>
+                                            <h5 class="modal-title" v-else-if="dialogFlag === 'fail'">{{ texts[lang]['fail'] }}</h5>
+                                            <h5 class="modal-title" v-else-if="dialogFlag === 'success'">{{ texts[lang]['saved'] }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div v-if="flagNewName === '0'">
+                                            <div v-if="dialogFlag === 'waiting'">
                                                 {{ texts[lang]['confirmOffer'] }}
-
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                                        texts[lang]['no']
+                                                        }}
+                                                    </button>
+                                                    <button type="button" class="btn btn-success" @click="editWiFiName()">
+                                                        {{
+                                                        texts[lang]['yes'] }}
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div v-else-if="flagNewName === '1'">
-                                                {{ texts[lang]['codeError'] }} {{xhrStatusPorts}} {{xhrStatusPortsText}}
-                                                <br>
+                                            <div v-else-if="dialogFlag === 'fail'">
+                                                {{ texts[lang]['codeError'] }} {{xhrStatusPorts}} {{xhrStatusPortsText}} <br>
                                                 {{ texts[lang]['tryNextTime'] }}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                        {{
+                                                        texts[lang]['ok'] }}
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div v-else>
+                                            <div v-else-if="dialogFlag === 'success'">
                                                 {{ texts[lang]['savedSettings'] }}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                        {{
+                                                        texts[lang]['ok'] }}
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
-                                                texts[lang]['no']
-                                                }}
-                                            </button>
-                                            <button type="button" class="btn btn-success" @click="editWIFIName()">
-                                                {{
-                                                texts[lang]['yes'] }}
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -293,7 +268,71 @@
 
                         <!-- Button -->
                         <div class="form-group">
-                                <button id="SaveHullNumber" name="SaveHullNumber" class="btn btn-success" v-text="texts[lang]['save']" @click="hullConfig()">Save</button>
+                                <button class="btn btn-success" v-text="texts[lang]['save']" @click="refreshDialogFlag()"
+                                        data-toggle="modal" data-target="#SaveHullNumberDialog">Save</button>
+                        </div>
+
+                        <div class="modal fade" id="SaveHullNumberDialog" tabindex="-1" role="dialog" aria-labelledby="SaveHullNumberDialog"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" v-if="dialogFlag === 'waiting'">{{ texts[lang]['confirm'] }}</h5>
+                                        <h5 class="modal-title" v-else-if="dialogFlag === 'fail'">{{ texts[lang]['fail'] }}</h5>
+                                        <h5 class="modal-title" v-else-if="dialogFlag === 'success'">{{ texts[lang]['saved'] }}</h5>
+                                        <h5 class="modal-title" v-else-if="dialogFlag === 'wrongInput'">{{ texts[lang]['wrongInput'] }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div v-if="dialogFlag === 'waiting'">
+                                            {{ texts[lang]['confirmOffer'] }}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                                    texts[lang]['no']
+                                                    }}
+                                                </button>
+                                                <button type="button" class="btn btn-success" @click="hullConfig()">
+                                                    {{
+                                                    texts[lang]['yes'] }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div v-else-if="dialogFlag === 'fail'">
+                                            {{ texts[lang]['codeError'] }} {{xhrStatusPorts}} {{xhrStatusPortsText}} <br>
+                                            {{ texts[lang]['tryNextTime'] }}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                    {{
+                                                    texts[lang]['ok'] }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div v-else-if="dialogFlag === 'success'">
+                                            {{ texts[lang]['savedSettings'] }}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                    {{
+                                                    texts[lang]['ok'] }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div v-else-if="dialogFlag === 'wrongInput'">
+                                            {{ texts[lang]['inputShouldBe'] }}: <br>
+                                            {{ texts[lang]['hullNumber'] }} - 00 <br>
+                                            {{ texts[lang]['leaderIP'] }} - 000.000.000.000 <br>
+                                            {{ texts[lang]['tryNextTime'] }}
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">
+                                                    {{
+                                                    texts[lang]['ok'] }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 			<!-- </form> -->
                     </div>
@@ -303,15 +342,14 @@
         <div class="tab-pane fade" id="port">
 
 
-            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultPorts()"
-                    data-toggle="modal"
-                    data-target="#DefaultModalCenter">{{
+            <button type="button" class="btn btn-secondary layer2 main-color-green"
+                    data-toggle="modal" data-target="#DefaultPortsDialog">{{
                 texts[lang]['default'] }}
             </button>
 
 
-            <div class="modal fade" id="DefaultModalCenter" tabindex="-1" role="dialog"
-                 aria-labelledby="DefaultModalCenter"
+            <div class="modal fade" id="DefaultPortsDialog" tabindex="-1" role="dialog"
+                 aria-labelledby="DefaultPortsDialog"
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -322,14 +360,14 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{ texts[lang]['confirmOffer'] }}
+                            {{ texts[lang]['toDefaultSettings'] }}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
                                 texts[lang]['no']
                                 }}
                             </button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="getPorts()">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" @click="defaultPorts()">
                                 {{
                                 texts[lang]['yes'] }}
                             </button>
@@ -642,47 +680,58 @@
 
 
             <button type="button" class=" btn btn-success btn-md btn-block fixed-bottom " data-toggle="modal"
-                    data-target="#ModalCenter" @click="getZeroFlagPorts()">
+                    data-target="#SavePortsDialog" @click="refreshDialogFlag()">
                 <i class="glyphicon glyphicon-ok"></i>
                 {{ texts[lang]['save'] }}
             </button>
 
 
             <!-- Modal -->
-            <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+            <div class="modal fade" id="SavePortsDialog" tabindex="-1" role="dialog" aria-labelledby="SavePortsDialog"
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" v-if="flagPorts === '0'">{{ texts[lang]['confirm'] }}</h5>
-                            <h5 class="modal-title" v-else-if="flagPorts === '1'">{{ texts[lang]['fail'] }}</h5>
-                            <h5 class="modal-title" v-else>{{ texts[lang]['saved'] }}</h5>
+                            <h5 class="modal-title" v-if="dialogFlag === 'waiting'">{{ texts[lang]['confirm'] }}</h5>
+                            <h5 class="modal-title" v-else-if="dialogFlag === 'fail'">{{ texts[lang]['fail'] }}</h5>
+                            <h5 class="modal-title" v-else-if="dialogFlag === 'success'">{{ texts[lang]['saved'] }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div v-if="flagPorts === '0'">
+                            <div v-if="dialogFlag === 'waiting'">
                                 {{ texts[lang]['confirmOffer'] }}
-
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                        texts[lang]['no']
+                                        }}
+                                    </button>
+                                    <button type="button" class="btn btn-success" @click="getPorts()">
+                                        {{
+                                        texts[lang]['yes'] }}
+                                    </button>
+                                </div>
                             </div>
-                            <div v-else-if="flagPorts === '1'">
+                            <div v-else-if="dialogFlag === 'fail'">
                                 {{ texts[lang]['codeError'] }} {{xhrStatusPorts}} {{xhrStatusPortsText}} <br>
                                 {{ texts[lang]['tryNextTime'] }}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                        {{
+                                        texts[lang]['ok'] }}
+                                    </button>
+                                </div>
                             </div>
-                            <div v-else>
+                            <div v-else-if="dialogFlag === 'success'">
                                 {{ texts[lang]['savedSettings'] }}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                                        {{
+                                        texts[lang]['ok'] }}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
-                                texts[lang]['no']
-                                }}
-                            </button>
-                            <button type="button" class="btn btn-success" @click="getPorts()">
-                                {{
-                                texts[lang]['yes'] }}
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -691,14 +740,14 @@
         </div>
         <div class="tab-pane fade" id="ga">
 
-            <button type="button" class="btn btn-secondary layer2 main-color-green" v-on:click="defaultGA"
+            <button type="button" class="btn btn-secondary layer2 main-color-green"
                     data-toggle="modal"
-                    data-target="#exampleDefaultCenter">{{
+                    data-target="#DefaultGADialog">{{
                 texts[lang]['default'] }}
             </button>
 
-            <div class="modal fade" id="exampleDefaultCenter" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="DefaultGADialog" tabindex="-1" role="dialog"
+                 aria-labelledby="DefaultGADialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -708,13 +757,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {{ texts[lang]['confirmOffer'] }}
+                            {{ texts[lang]['toDefaultSettings'] }}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
                                 texts[lang]['no'] }}
                             </button>
-                            <button type="button" class="btn btn-success" @click="getGA()" data-dismiss="modal">
+                            <button type="button" class="btn btn-success" v-on:click="defaultGA" data-dismiss="modal">
                                 {{ texts[lang]['yes'] }}
                             </button>
                         </div>
@@ -845,43 +894,56 @@
                 </div>
 
                 <button type="button" class="btn btn-success btn-md btn-block fixed-bottom" data-toggle="modal"
-                        data-target="#exampleModalCenter" @click="getZeroFlagGA()">
+                        data-target="#GAConfirmDialog" @click="refreshDialogFlag()">
                     <i class="glyphicon glyphicon-ok"></i>
                     {{ texts[lang]['save'] }}
                 </button>
 
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="GAConfirmDialog" tabindex="-1" role="dialog" aria-labelledby="GAConfirmDialog"
+                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" v-if="flagGA === '0'">{{ texts[lang]['confirm'] }}</h5>
-                                <h5 class="modal-title" v-else-if="flagGA === '1'">{{ texts[lang]['fail'] }}</h5>
-                                <h5 class="modal-title" v-else>{{ texts[lang]['saved'] }}</h5>
+                                <h5 class="modal-title" v-if="dialogFlag === 'waiting'">{{ texts[lang]['confirm'] }}</h5>
+                                <h5 class="modal-title" v-else-if="dialogFlag === 'fail'">{{ texts[lang]['fail'] }}</h5>
+                                <h5 class="modal-title" v-else-if="dialogFlag === 'success'">{{ texts[lang]['saved'] }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div v-if="flagGA === '0'">
+                                <div v-if="dialogFlag === 'waiting'">
                                     {{ texts[lang]['confirmOffer'] }}
-
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
+                                            texts[lang]['no']
+                                            }}
+                                        </button>
+                                        <button type="button" class="btn btn-success" @click="getGA()">
+                                            {{
+                                            texts[lang]['yes'] }}
+                                        </button>
+                                    </div>
                                 </div>
-                                <div v-else-if="flagGA === '1'">
+                                <div v-else-if="dialogFlag === 'fail'">
                                     {{ texts[lang]['codeError'] }} {{xhrStatusPorts}} {{xhrStatusPortsText}} <br>
                                     {{ texts[lang]['tryNextTime'] }}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                                            {{
+                                            texts[lang]['ok'] }}
+                                        </button>
+                                    </div>
                                 </div>
-                                <div v-else>
+                                <div v-else-if="dialogFlag === 'success'">
                                     {{ texts[lang]['savedSettings'] }}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                                            {{
+                                            texts[lang]['ok'] }}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{
-                                    texts[lang]['no'] }}
-                                </button>
-                                <button type="button" class="btn btn-success" @click="getGA()">
-                                    {{ texts[lang]['yes'] }}
-                                </button>
                             </div>
                         </div>
                     </div>

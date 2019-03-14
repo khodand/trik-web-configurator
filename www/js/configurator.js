@@ -63,9 +63,7 @@ const app = new Vue({
         accelFreq: "50",
         accelRange: "2G",
         // Success(Error) message
-        flagPorts: "0",
-        flagNewName: "0",
-        flagGA: "0",
+        dialogFlag: "waiting", // waiting ; fail ; success ; wrongInput
         xhrStatusPorts: "",
         xhrStatusPortsText: "",
         // Other (not front usage)
@@ -125,22 +123,10 @@ const app = new Vue({
 
     },
     methods: {
-        httpPostRequest(path, params) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", path);
-            xhr.setRequestHeader('Content-Type', 'text-plain');
+        refreshDialogFlag() {
+            this.dialogFlag = "waiting";
+        },
 
-            xhr.send(params);
-        },
-        getZeroFlagPorts() {
-            this.flagPorts = "0";
-        },
-        getZeroFlagNewName() {
-            this.flagNewName = "0";
-        },
-        getZeroFlagGA() {
-            this.flagGA = "0";
-        },
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -153,27 +139,31 @@ const app = new Vue({
             this.xhrStatusPorts = xhr.status;
             this.xhrStatusPortsText = xhr.statusText;
             if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagPorts = "1";
+                this.dialogFlag = "fail";
             } else {
-                this.flagPorts = "2";
+                this.dialogFlag = "success";
             }
         },
+
         changeLang(lang) {
             this.lang = lang;
         },
+
         getGA() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
+
             this.xhrStatusPorts = xhr.status;
             this.xhrStatusPortsText = xhr.statusText;
             if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagGA = "1";
+                this.dialogFlag = "fail";
             } else {
-                this.flagGA = "2";
+                this.dialogFlag = "success";
             }
         },
+
         defaultPorts() {
             this.s1 = "angularServomotor";
             this.s2 = "angularServomotor";
@@ -205,6 +195,7 @@ const app = new Vue({
             this.e3State = "true";
             this.e4State = "true";
         },
+
         defaultGA() {
             this.gyroscope = "ON";
             this.accelerometer = "ON";
@@ -213,38 +204,45 @@ const app = new Vue({
             this.accelFreq = "50";
             this.accelRange = "2G";
         },
-        editWIFIName() {
+
+        editWiFiName() {
             var xhr = new XMLHttpRequest();
             this.hostName = this.wifiName;
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
             xhr.send(`${this.wifiName} \n`);
+
             this.xhrStatusPorts = xhr.status;
             this.xhrStatusPortsText = xhr.statusText;
             if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagNewName = "1";
+                this.dialogFlag = "fail";
             } else {
-                this.flagNewName = "2";
+                this.dialogFlag = "success";
             }
         },
-        buttonSUP() { //teesrt
-            if (this.buttonChangeState === "true") this.buttonChangeState = "false";
-            else this.buttonChangeState = "true";
-        },
+
         regShowLanguage() {
             if (window.innerWidth > 993) return "true";
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
         hullConfig() {
-            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) !== -1 ||
+            if (this.hullNumber.search(/[\D]/) !== -1 ||
                 this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) === -1 )
-                alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
+                this.dialogFlag = "wrongInput";
             else {
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
+
+                this.xhrStatusPorts = xhr.status;
+                this.xhrStatusPortsText = xhr.statusText;
+                if (!(xhr.status >= 200 && xhr.status < 300)) {
+                    this.dialogFlag = "fail";
+                } else {
+                    this.dialogFlag = "success";
+                }
             }
 
         },
