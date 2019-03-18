@@ -76,9 +76,7 @@ const app = new Vue({
         xhr.send();
         var x = "asdas";
         if (!(xhr.status >= 200 && xhr.status < 300)) {
-            // Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
         } else {
-            // Здесь нужен alert об успехе
             var text = xhr.responseText;
             text = text.split('\n');
             var ports = text[0].split(' ');
@@ -127,18 +125,6 @@ const app = new Vue({
             this.dialogFlag = "waiting";
         },
 
-        xhrOnReadyFunction(xhr) {
-            if (xhr.readyState != 4) return;
-
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.dialogFlag = "fail";
-            } else {
-                this.dialogFlag = "success";
-            }
-        },
-
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -146,10 +132,19 @@ const app = new Vue({
 
             params = `S1=${this.s1} S2=${this.s2} S3=${this.s3} S4=${this.s4} S5=${this.s5} S6=${this.s6} A1=${this.a1} A2=${this.a2} A3=${this.a3} A4=${this.a4} A5=${this.a5} A6=${this.a6} D1=${this.d1} D2=${this.d2} D3=${this.d3} E1=${this.e1}?${this.e1State} E2=${this.e2}?${this.e2State} E3=${this.e3}?${this.e3State} E4=${this.e4}?${this.e4State} M1=${this.m1} M2=${this.m2} M3=${this.m3} M4=${this.m4} video1=${this.video1} video2=${this.video2} \n`
 
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
+
             xhr.send(params);
-
-            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
-
         },
 
         changeLang(lang) {
@@ -160,10 +155,20 @@ const app = new Vue({
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
+
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
-
-            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
-
         },
 
         defaultPorts() {
@@ -212,9 +217,19 @@ const app = new Vue({
             this.hostName = this.wifiName;
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
-            xhr.send(`${this.wifiName} \n`);
 
-            xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
+            xhr.send(`${this.wifiName} \n`);
         },
 
         regShowLanguage() {
@@ -229,12 +244,22 @@ const app = new Vue({
                 this.dialogFlag = "wrongInput";
             else {
                 var xhr = new XMLHttpRequest();
-                xhr.timeout = 700000;
                 xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
-                xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
 
-		        xhr.onreadystatechange = this.xhrOnReadyFunction(xhr);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if ((xhr.status >= 200 && xhr.status < 300)) {
+                            app.dialogFlag = "success";
+                        } else {
+                            app.xhrStatusPorts = xhr.status;
+                            app.xhrStatusPortsText = xhr.statusText;
+                            app.dialogFlag = "fail";
+                        }
+                    }
+                };
+
+                xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
             }
         },
     }
