@@ -63,27 +63,23 @@ const app = new Vue({
         accelFreq: "50",
         accelRange: "2G",
         // Success(Error) message
-        flagPorts: "0",
-        flagNewName: "0",
-        flagGA: "0",
+        dialogFlag: "waiting", // waiting ; fail ; success ; wrongInput
         xhrStatusPorts: "",
         xhrStatusPortsText: "",
         // Other (not front usage)
         scriptPath: "/cgi-bin/",
     },
-    beforeCreate: function () {
+    created: function () {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.scriptPath + "get-current.sh", false);
         xhr.setRequestHeader('Content-Type', 'text-plain');
         xhr.send();
         var x = "asdas";
         if (!(xhr.status >= 200 && xhr.status < 300)) {
-            // Здесь нужен alert об ошибке, существуют переменные которые хранят код ошибки ( xhr.status ) и ее текст ( xhr.statusText ), используй их тоже
         } else {
-            // Здесь нужен alert об успехе
             var text = xhr.responseText;
             text = text.split('\n');
-            ports = text[0].split(' ');
+            var ports = text[0].split(' ');
             ag = text[1].split(' ');
         }
         this.s1 = ports[0];
@@ -125,22 +121,10 @@ const app = new Vue({
 
     },
     methods: {
-        httpPostRequest(path, params) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", path);
-            xhr.setRequestHeader('Content-Type', 'text-plain');
+        refreshDialogFlag() {
+            this.dialogFlag = "waiting";
+        },
 
-            xhr.send(params);
-        },
-        getZeroFlagPorts() {
-            this.flagPorts = "0";
-        },
-        getZeroFlagNewName() {
-            this.flagNewName = "0";
-        },
-        getZeroFlagGA() {
-            this.flagGA = "0";
-        },
         getPorts() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "config-writer.sh");
@@ -148,32 +132,45 @@ const app = new Vue({
 
             params = `S1=${this.s1} S2=${this.s2} S3=${this.s3} S4=${this.s4} S5=${this.s5} S6=${this.s6} A1=${this.a1} A2=${this.a2} A3=${this.a3} A4=${this.a4} A5=${this.a5} A6=${this.a6} D1=${this.d1} D2=${this.d2} D3=${this.d3} E1=${this.e1}?${this.e1State} E2=${this.e2}?${this.e2State} E3=${this.e3}?${this.e3State} E4=${this.e4}?${this.e4State} M1=${this.m1} M2=${this.m2} M3=${this.m3} M4=${this.m4} video1=${this.video1} video2=${this.video2} \n`
 
-            xhr.send(params);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
 
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagPorts = "1";
-            } else {
-                this.flagPorts = "2";
-            }
+            xhr.send(params);
         },
+
         changeLang(lang) {
             this.lang = lang;
         },
+
         getGA() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", this.scriptPath + "ag-config.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
+
             xhr.send(`${this.accelerometer} ${this.accelFreq} ${this.accelRange} ${this.gyroscope} ${this.gyroFreq} ${this.gyroRange} \n`);
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagGA = "1";
-            } else {
-                this.flagGA = "2";
-            }
         },
+
         defaultPorts() {
             this.s1 = "angularServomotor";
             this.s2 = "angularServomotor";
@@ -205,6 +202,7 @@ const app = new Vue({
             this.e3State = "true";
             this.e4State = "true";
         },
+
         defaultGA() {
             this.gyroscope = "ON";
             this.accelerometer = "ON";
@@ -213,43 +211,57 @@ const app = new Vue({
             this.accelFreq = "50";
             this.accelRange = "2G";
         },
-        editWIFIName() {
+
+        editWiFiName() {
             var xhr = new XMLHttpRequest();
             this.hostName = this.wifiName;
             xhr.open("POST", this.scriptPath + "rename.sh");
             xhr.setRequestHeader('Content-Type', 'text-plain');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if ((xhr.status >= 200 && xhr.status < 300)) {
+                        app.dialogFlag = "success";
+                    } else {
+                        app.xhrStatusPorts = xhr.status;
+                        app.xhrStatusPortsText = xhr.statusText;
+                        app.dialogFlag = "fail";
+                    }
+                }
+            };
             xhr.send(`${this.wifiName} \n`);
-            this.xhrStatusPorts = xhr.status;
-            this.xhrStatusPortsText = xhr.statusText;
-            if (!(xhr.status >= 200 && xhr.status < 300)) {
-                this.flagNewName = "1";
-            } else {
-                this.flagNewName = "2";
-            }
         },
-        buttonSUP() { //teesrt
-            if (this.buttonChangeState === "true") this.buttonChangeState = "false";
-            else this.buttonChangeState = "true";
-        },
+
         regShowLanguage() {
             if (window.innerWidth > 993) return "true";
             else if (this.buttonChangeState === "true") return "true";
             else return "false";
         },
+	
         hullConfig() {
-            if (this.hullNumber.length < 0 || this.hullNumber.search(/[\D]/) !== -1 ||
+            if (this.hullNumber.search(/[\D]/) !== -1 ||
                 this.leaderIP.search(/^([0-9]{1,3}[\.]){3}[0-9]{1,3}$/) === -1 )
-                alert("Wrong input, should be:\n" + "00\n" + "000.000.000.000");
+                this.dialogFlag = "wrongInput";
             else {
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", this.scriptPath + "hull-config.sh");
                 xhr.setRequestHeader('Content-Type', 'text-plain');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        if ((xhr.status >= 200 && xhr.status < 300)) {
+                            app.dialogFlag = "success";
+                        } else {
+                            app.xhrStatusPorts = xhr.status;
+                            app.xhrStatusPortsText = xhr.statusText;
+                            app.dialogFlag = "fail";
+                        }
+                    }
+                };
+
                 xhr.send(`${this.hullNumber} ${this.leaderIP}\n`);
             }
-
         },
-        
-
     }
 });
 
